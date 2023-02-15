@@ -1,10 +1,10 @@
 <div class="body-container m-5">
-    <form (ngSubmit)="login()" #myForm = "ngForm" autocomplete="off">
+    <form (ngSubmit)="login()" #myForm = "ngForm" autocomplete="off" action="#">
         <div class="mb-3 row justify-content-center">
             <div class=" col-sm-12 col-md-6">
                 <label for="email">Correo electrónico*:</label>
                 <input class="form-control" type="email"
-                placeholder="Ejemplo: ejemplo@gmail.com"
+                placeholder="ejemplo@gmail.com"
                 [(ngModel)]="email"
                 name="email"
                 required [pattern]="emailPattern">
@@ -19,7 +19,7 @@
                 <label for="password">Contraseña*:</label>
                 <input class="form-control"
                     type="password"
-                    placeholder="Ejemplo: ********" 
+                    placeholder="********" 
                     [(ngModel)] = "password"
                     name="password"
                     minlength="3"

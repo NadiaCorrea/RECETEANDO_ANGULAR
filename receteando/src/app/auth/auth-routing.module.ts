@@ -11,8 +11,7 @@ const routes: Routes = [
     children:[
       { path:'register', component:RegisterComponent },
       { path:'login', component:LoginComponent},
-      { path:'verify', component:VerifyComponent},
-      { path: '**', redirectTo: 'login'}
+      { path:'verify', component:VerifyComponent}
     ]
   }
 ]

@@ -30,6 +30,10 @@
     color: var(--black);
 }
 
+.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+    background-color: var(--darkerGreen);
+    border-color: var(--darkerGreen);
+}
 
 .presentation p{
     text-align: justify;
