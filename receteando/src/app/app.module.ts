@@ -8,6 +8,7 @@ import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { RecipeModule } from './recipe/recipe.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     SharedModule, 
     HomeModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    RecipeModule
   ],
   providers: [ 
     {

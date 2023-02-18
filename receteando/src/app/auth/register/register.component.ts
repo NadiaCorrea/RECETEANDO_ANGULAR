@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { User } from 'src/app/interfaces/user.interface';
+import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -15,15 +19,9 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     }, {Validators:[this.passwordValidator()]});
 
-  constructor(private fb:FormBuilder) { 
+  constructor(private fb:FormBuilder, private userService: UserService, private router:Router) { }
 
-   
-
-  }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 
   notValidField(campo:string){
     return this.myForm.controls[campo].errors &&
@@ -40,7 +38,6 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-
   notSame():boolean{
     const pass: string = this.myForm.get('password')?.value;
     const rePass : string = this.myForm.get('confirmPassword')?.value;
@@ -50,8 +47,39 @@ export class RegisterComponent implements OnInit {
     }else{
       return false;
     }
+  }
 
-    
+  register(){
+
+   const newUser : User = {
+    username:this.myForm.get('username')?.value, 
+    email:this.myForm.get('email')?.value, 
+    name:this.myForm.get('name')?.value,
+    password:this.myForm.get('password')?.value
+  }
+
+  this.userService.addUser(newUser).subscribe({
+    next:(resp) =>{
+      console.log(resp);
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Tu cuenta ha sido creada. Por favor, revisa tu correo para verificar tu cuenta',
+        showConfirmButton: true,
+        timer: 3500
+      });
+      this.router.navigate(['/']);
+    },
+    error:(error) =>{
+      console.log(error.error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: `${error.error.message}`,
+        icon: 'error'
+      });
+    }
+
+  });
   }
 
 }

@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,5 +19,13 @@ export class UserService {
 
   getUser(userId:number):Observable<User>{
     return this.http.get<User>(`http://localhost:8080/user/${userId}`)
+  }
+
+  addUser(user:User):Observable<User>{
+    return this.http.post<User>('http://localhost:8080/register', user)
+  }
+
+  verifyUser(code :string){
+    return this.http.get<User>(`http://localhost:8080/verify?code=${code}`)
   }
 }

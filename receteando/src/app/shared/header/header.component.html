@@ -1,4 +1,4 @@
-    <header class="myHeader mv-100">
+    <header class="myHeader container-fluid">
 
         <nav class="navbar navbar-expand-lg">
 <!--Logo-->
@@ -8,28 +8,27 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 <!--Buscador-->
-                <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" *ngIf="showing">
+                <div class="collapse navbar-collapse justify-content-between invisible" id="navbarSupportedContent" *ngIf="showing">
                     <form class="d-flex ms-5" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Search">
+                        <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Search" size="50">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
 <!--Configuración-->
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0">
-                        <li class="nav-item dropdown" data-toggle="tooltip"
-                        data-placement="bottom" title="Configurar perfil">
+                        <li class="nav-item dropdown text-center">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-gear"></i>
+                                <i class="bi bi-gear"></i>                   
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Modificar contraseña</a></li>
                                 <li><a class="dropdown-item" href="#">Modificar perfil</a></li>
                             </ul>
+                            <p>Configuración</p> 
                         </li>
 <!--Logout-->
-                        <li class="nav-item"  data-toggle="tooltip"
-                            data-placement="bottom" title="Cerrar sesión">
-                            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right" data-toggle="tooltip"
-                                data-placement="bottom" title="Salir"></i></a>
+                        <li class="nav-item text-center ms-5">
+                            <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+                            <p>Salir</p> 
                         </li>
                     </ul>
                 </div>

@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import  Swal from 'sweetalert2';
-import { catchError, of } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('myForm') myForm !: NgForm;
 
-  constructor(private authService:AuthenticationService) { 
+  constructor(private authService:AuthenticationService, private router:Router) { 
   }
 
   ngOnInit(): void {
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
       next:(resp) =>{
         console.log(resp);
         localStorage.setItem('token', JSON.stringify(resp));
-
+        this.router.navigate(['recipe']);
       },
       error:(error) =>{
         Swal.fire({
@@ -42,8 +43,7 @@ export class LoginComponent implements OnInit {
           text: 'Credenciales incorrectas.',
           icon: 'error'
         });
-
-
+        this.router.navigate(['/auth/login']);
       }
     }) 
   }

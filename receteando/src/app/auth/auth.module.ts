@@ -8,6 +8,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { VerifyComponent } from './verify/verify.component';
 import { RegisterComponent } from './register/register.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -22,7 +23,8 @@ import { RegisterComponent } from './register/register.component';
     CommonModule,
     AuthRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class AuthModule { }
