@@ -6,6 +6,7 @@ import { RecipeDetailsComponent } from './recipe-details/recipe-details.componen
 import { RecipeStepsComponent } from './recipe-steps/recipe-steps.component';
 import { RecipeIngredientsComponent } from './recipe-ingredients/recipe-ingredients.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
   ],
   imports: [
     CommonModule,
-    RecipeRoutingModule
+    RecipeRoutingModule,
+    RouterModule
   ]
 })
 export class RecipeModule { }

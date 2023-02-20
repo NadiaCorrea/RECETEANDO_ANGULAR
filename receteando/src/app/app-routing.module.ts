@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 // Lazy Loading  for main routes 
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   {
     path:'recipe', 
+    canActivateChild:[AuthGuardService],
     loadChildren:() => import('./recipe/recipe.module').then(m => m.RecipeModule)
   },
   {

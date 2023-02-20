@@ -9,7 +9,6 @@ import { Credential } from '../interfaces/credential.interface';
 export class AuthenticationService {
   private loginURL:string = 'http://localhost:8080/login';
 
-
   constructor(private http:HttpClient) { }
 
   login(email:string, password:string):Observable<string> {
@@ -20,5 +19,11 @@ export class AuthenticationService {
 
   }
 
+  isAuthenticated(){
+    return localStorage.getItem('authenticated')==='true';
+  }
 
+  logOut(){
+    localStorage.setItem('authenticated', 'false');
+  }
 }

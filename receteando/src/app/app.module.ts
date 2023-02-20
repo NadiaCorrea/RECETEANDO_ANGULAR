@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RecipeModule } from './recipe/recipe.module';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { RecipeModule } from './recipe/recipe.module';
     RecipeModule
   ],
   providers: [ 
+    AuthGuardService,
+    AuthenticationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

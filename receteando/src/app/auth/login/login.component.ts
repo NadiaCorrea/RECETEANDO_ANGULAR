@@ -32,12 +32,14 @@ export class LoginComponent implements OnInit {
   login(){
     this.authService.login(this.email, this.password)
     .subscribe({
-      next:(resp) =>{
+      next:(resp:any) =>{
         console.log(resp);
-        localStorage.setItem('token', JSON.stringify(resp));
-        this.router.navigate(['recipe']);
+        localStorage.setItem('authenticated', 'true');
+        localStorage.setItem('token', resp.token);
+        this.router.navigate(['/recipe/list']);
       },
       error:(error) =>{
+        localStorage.setItem('authenticated', 'false');
         Swal.fire({
           title: 'Error!',
           text: 'Credenciales incorrectas.',
