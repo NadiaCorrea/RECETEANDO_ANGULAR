@@ -7,6 +7,7 @@ import { RecipeStepsComponent } from './recipe-steps/recipe-steps.component';
 import { RecipeIngredientsComponent } from './recipe-ingredients/recipe-ingredients.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RecipeRoutingModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 export class RecipeModule { }

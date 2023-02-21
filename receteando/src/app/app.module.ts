@@ -11,6 +11,9 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RecipeModule } from './recipe/recipe.module';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
+import { ShowingElementsService } from './services/showing-elements.service';
+import { UserService } from './services/user.service';
+import { RecipeService } from './services/recipe.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { AuthenticationService } from './services/authentication.service';
   providers: [ 
     AuthGuardService,
     AuthenticationService,
+    ShowingElementsService,
+    UserService,
+    RecipeService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

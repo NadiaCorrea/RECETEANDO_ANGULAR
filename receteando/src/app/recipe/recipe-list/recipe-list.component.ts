@@ -3,6 +3,8 @@ import { RecipeService } from '../../services/recipe.service';
 import { Router } from '@angular/router';
 import { Page } from '../../interfaces/page.interface';
 import { Recipe } from '../../interfaces/recipe.interface';
+import { ShowingElementsService } from '../../services/showing-elements.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-recipe-list',
@@ -22,24 +24,40 @@ export class RecipeListComponent implements OnInit {
     numberOfElements:0
   };
 
-  constructor(private recipeService:RecipeService, private router:Router) { }
+  constructor(private recipeService:RecipeService, private router:Router, private showingService: ShowingElementsService) { }
 
   ngOnInit(): void {
+    this.showingService.show();
 
-    this.recipeService.getRecipes().subscribe({
+    this.recipeService.getRecipes(1, 1).subscribe({
       next:(resp) =>{
         this.recipes = resp;
       },
       error:(error) =>{
-        console.log(error);
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Ha habido un fallo al obtener las recetas.',
+          icon: 'error'
+        });
       }
     })
-
-
-
-
   }
 
+
+  getRecipePage(page: number){
+    this.recipeService.getRecipes(page, 1).subscribe({
+      next:(resp) =>{
+        this.recipes = resp;
+      },
+      error:(error) =>{
+        Swal.fire({
+          title: '¡Error!',
+          text: 'Ha habido un fallo al obtener las recetas.',
+          icon: 'error'
+        });
+      }
+    })
+  }
 
 
 

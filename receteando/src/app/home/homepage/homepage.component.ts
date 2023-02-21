@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShowingElementsService } from '../../services/showing-elements.service';
 
 @Component({
   selector: 'app-homepage',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private showingElements:ShowingElementsService) { }
 
   ngOnInit(): void {
+    this.showingElements.hide();
   }
 
 }

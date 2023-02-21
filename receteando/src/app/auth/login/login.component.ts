@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import  Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { ShowingElementsService } from '../../services/showing-elements.service';
 
 
 @Component({
@@ -16,10 +17,11 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('myForm') myForm !: NgForm;
 
-  constructor(private authService:AuthenticationService, private router:Router) { 
+  constructor(private authService:AuthenticationService, private router:Router, private showingElements:ShowingElementsService) { 
   }
 
   ngOnInit(): void {
+    this.showingElements.hide();
   }
 
   //method that validates that the fields meet the requirements 

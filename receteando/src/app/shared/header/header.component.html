@@ -8,7 +8,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 <!--Buscador-->
-                <div class="collapse navbar-collapse justify-content-between invisible" id="navbarSupportedContent" *ngIf="showing">
+                <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" *ngIf="showingService.showingStatus()">
                     <form class="d-flex ms-5" role="search">
                         <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Search" size="50">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>

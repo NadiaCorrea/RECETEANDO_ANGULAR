@@ -63,3 +63,13 @@ i{
     font-weight:bold;
     font-size: 1.5em;
 }
+
+
+.active>.page-link{
+    background-color: var(--darkerGreen);
+    border-color: var(--darkerGreen);
+}
+
+.page-link{
+    color: var(--darkerGreen);
+}

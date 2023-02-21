@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+
 
 
 
@@ -12,7 +14,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PaginatorComponent
   ],
   imports: [
     CommonModule
@@ -20,7 +23,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   exports:[
     HeaderComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PaginatorComponent
   ]
 })
 export class SharedModule { }
