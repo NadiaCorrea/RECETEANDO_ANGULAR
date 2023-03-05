@@ -1,5 +1,4 @@
-<div class="body-container">
-
+<div class="container-fluid">
   <div class="row mt-5 mb-5 text-center">
     <div class="col-md-4 offset-md-4">
       <h1>Listado de recetas</h1>
@@ -14,15 +13,16 @@
 
       <div class="container mb-5">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+        <div class="row g-3">
         
-          <div class="col" *ngFor="let recipe of recipes.content">
+          <div class="col-md-4 col-sm-12 g-3" *ngFor="let recipe of recipes.content">
             <div class="card text-center" style="width:100%;">
-              <img src="https://res.cloudinary.com/dhqubydyc/image/upload/v1674458089/cld-sample-4.jpg" class="card-img-top" [alt]="recipe.name">
+              <img  *ngIf="recipe.photo !== null"  [src]="recipe.photo" class="card-img-top" [alt]="recipe.name">
+              <img  *ngIf="recipe.photo === null" src="https://res.cloudinary.com/dhqubydyc/image/upload/v1677067465/notPhoto_f2r3fn.jpg" class="card-img-top" [alt]="recipe.name">
               <div class="card-body">
                 <h5 class="card-title">{{recipe.name}}</h5>
                 <p class="card-text">{{recipe.description}}</p>
-                <a href="#" class="btn btn-primary"><i class="bi bi-eye"></i> Ver detalles</a>
+                <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye"></i> Ver detalles</a>
               </div>
             </div>
           </div>
@@ -32,17 +32,6 @@
     </div>
   </div>
   
-
   <app-paginator [totalPages]="recipes.totalPages" (selectPage)="getRecipePage($event)"></app-paginator>
-
-  <!-- <nav aria-label="pagination">
-    <ul class="pagination pagination-md justify-content-center">
-      <li class="page-item active" aria-current="page">
-        <span class="page-link">1</span>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-    </ul>
-  </nav> -->
 
 </div>

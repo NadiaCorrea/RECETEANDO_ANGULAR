@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,7 +19,8 @@ import { PaginatorComponent } from './paginator/paginator.component';
     PaginatorComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ], 
   exports:[
     HeaderComponent,

@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path:'',
     children:[
-      {path:'list', component:RecipeListComponent},
+      {path:'', component:RecipeListComponent},
       {path:'add', component:AddRecipeComponent},
       {path: ':id', component:RecipeDetailsComponent},
       {path:'**', redirectTo:'recipe'}

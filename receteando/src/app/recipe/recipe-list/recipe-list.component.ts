@@ -29,7 +29,7 @@ export class RecipeListComponent implements OnInit {
   ngOnInit(): void {
     this.showingService.show();
 
-    this.recipeService.getRecipes(1, 1).subscribe({
+    this.recipeService.getRecipes().subscribe({
       next:(resp) =>{
         this.recipes = resp;
       },
@@ -45,7 +45,7 @@ export class RecipeListComponent implements OnInit {
 
 
   getRecipePage(page: number){
-    this.recipeService.getRecipes(page, 1).subscribe({
+    this.recipeService.getRecipes(page).subscribe({
       next:(resp) =>{
         this.recipes = resp;
       },
@@ -60,5 +60,7 @@ export class RecipeListComponent implements OnInit {
   }
 
 
+
+  
 
 }

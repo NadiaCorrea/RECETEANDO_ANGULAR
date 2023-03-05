@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         console.log(resp);
         localStorage.setItem('authenticated', 'true');
         localStorage.setItem('token', resp.token);
-        this.router.navigate(['/recipe/list']);
+        this.router.navigate(['/recipe']);
       },
       error:(error) =>{
         localStorage.setItem('authenticated', 'false');

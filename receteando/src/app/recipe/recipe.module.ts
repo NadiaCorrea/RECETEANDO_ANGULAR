@@ -8,6 +8,7 @@ import { RecipeIngredientsComponent } from './recipe-ingredients/recipe-ingredie
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -23,7 +24,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     RecipeRoutingModule,
     RouterModule,
-    SharedModule
+    SharedModule, 
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class RecipeModule { }

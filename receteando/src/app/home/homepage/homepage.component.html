@@ -17,12 +17,12 @@
                 No lo pienses más y unéte a nuestra comunidad.
                 </p>
             </div>
-            <div class="row mb-3 mt-3">
+            <div class="row mb-3 mt-3" *ngIf="!isLoggedIn()">
                 <div class="col-sm-12 col-md-6 d-flex justify-content-center mb-3">
                     <a [routerLink]="['/auth/register']"><button type="button" class="btn btn-primary">Registrarse</button></a>  
                 </div>
                 <div class="col-sm-12 col-md-6 d-flex justify-content-center mb-3">
-                    <a [routerLink]="['/auth/login']"  ><button type="button" class="btn btn-primary">Iniciar sesión</button></a>  
+                    <a [routerLink]="['/auth/login']"><button type="button" class="btn btn-primary">Iniciar sesión</button></a>  
                 </div>
             </div>
             

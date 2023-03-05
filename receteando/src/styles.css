@@ -11,8 +11,6 @@
   html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
 }
 
 *{
@@ -59,9 +57,10 @@
     text-indent: 20px;
 }
 
-i{
+i {
     font-weight:bold;
     font-size: 1.5em;
+    cursor: pointer;
 }
 
 
@@ -72,4 +71,8 @@ i{
 
 .page-link{
     color: var(--darkerGreen);
+}
+
+.icons-btn{
+    font-size: small;
 }
