@@ -1,0 +1,49 @@
+<div class="body-container m-5">
+    <form (ngSubmit)="update()" #myForm = "ngForm" autocomplete="off" action="#">
+        <div class="mb-5 row justify-content-center">
+            <div class="col-8 col-md-4">
+                <label for="username" class="mb-3">Nombre de usuario:</label>
+                <input class="form-control" type="text"
+                [(ngModel)]="user.username"
+                name="username"
+                readonly>
+            </div>
+        </div>
+
+        <div class="mb-5 row justify-content-center">
+            <div class="col-8 col-md-4">
+                <label for="email" class="mb-3">Correo electrónico:</label>
+                <input class="form-control" type="email"
+                [(ngModel)]="user.email"
+                name="email"
+                readonly>
+            </div>
+        </div>
+
+        <div class="mb-5 row justify-content-center">
+            <div class="col-8 col-md-4">
+                <label for="name" class="mb-3">Nombre y Apellido*:</label>
+                <input class="form-control"
+                    type="text"
+                    [(ngModel)] = "user.name"
+                    name="name"
+                    minlength="3"
+                    required>
+                <span class="form-text text-danger" *ngIf="notValidField('name')">
+                    El nombre y apellido son obligatorios*.
+                </span>
+        </div>
+        
+        </div>
+        <div class="mb-5 row justify-content-center">
+            <div class="col-8 offset-3 col-md-4">
+                <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Modificar</button>
+            </div> 
+            <div class="col-8 col-md-4">
+                <a [routerLink]="['/']" routerLinkActive="active"><button type="button" class="btn btn-primary">Cancelar</button></a>
+            </div>
+        </div>
+    </form>
+</div>
+
+

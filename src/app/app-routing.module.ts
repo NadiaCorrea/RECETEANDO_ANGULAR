@@ -22,6 +22,11 @@ const routes: Routes = [
     loadChildren:() => import('./recipe/recipe.module').then(m => m.RecipeModule)
   },
   {
+    path:'user', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
     path:'**', 
     component:NotFoundComponent
   }

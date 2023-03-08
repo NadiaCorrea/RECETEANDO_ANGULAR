@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { Recipe } from '../interfaces/recipe.interface';
 import { Injectable } from '@angular/core';
 import { Page } from '../interfaces/page.interface';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
+
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class RecipeService{
 
     constructor(private http: HttpClient){}
 
-    getRecipes(pageNumber:number =1, sizeNumber:number=4, sortField:string = "name", keyword: string =""): Observable<Page<Recipe>>{
+    getRecipes(pageNumber:number =1, sizeNumber:number=6, sortField:string = "name", keyword: string =""): Observable<Page<Recipe>>{
         return this.http.get<Page<Recipe>>(`${this.url}/recipe?pageNumber=${pageNumber}&sizeNumber=${sizeNumber}&sortField=${sortField}&keyword=${keyword}`)
     }
 

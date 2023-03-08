@@ -5,7 +5,7 @@
             <div class="container-fluid">
             
                 <a class="navbar-brand" href="/" data-placement="bottom" title="Haz click para ir a la página principal">
-                    <img src="../../../assets/images/logo.png"  style="max-width: 100px; max-height: 80px;" alt="Logo de receteando"></a>
+                    <img src="assets/images/logo.png"  style="max-width: 100px; max-height: 80px;" alt="Logo de receteando"></a>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,8 +30,8 @@
                                 <i class="bi bi-gear"></i>                   
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Modificar contraseña</a></li>
-                                <li><a class="dropdown-item" href="#">Modificar perfil</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/user/password']">Modificar contraseña</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/user/profile']">Modificar perfil</a></li>
                             </ul>
                             <p>Configuración</p> 
                         </li>

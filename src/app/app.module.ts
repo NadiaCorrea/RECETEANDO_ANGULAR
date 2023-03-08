@@ -14,6 +14,7 @@ import { AuthenticationService } from './services/authentication.service';
 import { ShowingElementsService } from './services/showing-elements.service';
 import { UserService } from './services/user.service';
 import { RecipeService } from './services/recipe.service';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RecipeService } from './services/recipe.service';
     HomeModule,
     AuthModule,
     HttpClientModule,
-    RecipeModule
+    RecipeModule, 
+    UserModule
   ],
   providers: [ 
     AuthGuardService,

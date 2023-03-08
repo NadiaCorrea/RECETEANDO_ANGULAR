@@ -24,7 +24,7 @@ export class VerifyComponent implements OnInit {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Muchas gracias por verificar tu cuenta. Ya puede acceder a recteando.',
+          title: 'Muchas gracias por verificar tu cuenta. Ya puede acceder a Receteando.',
           showConfirmButton: true,
           timer: 3500
         });
