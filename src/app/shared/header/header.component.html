@@ -1,0 +1,47 @@
+    <header class="myHeader container-fluid">
+
+        <nav class="navbar navbar-expand-lg">
+<!--Logo-->
+            <div class="container-fluid">
+            
+                <a class="navbar-brand" href="/" data-placement="bottom" title="Haz click para ir a la página principal">
+                    <img src="../../../assets/images/logo.png"  style="max-width: 100px; max-height: 80px;" alt="Logo de receteando"></a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+<!--Buscador-->
+                <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
+                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/recipe']">
+                            <i class="bi bi-journal-richtext"></i></a>
+                        <p>Recetas</p>
+                        </li>
+                    </ul>
+                    <form class="d-flex ms-5" role="search" *ngIf="showingService.showingStatus()">
+                        <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Search" size="50">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+<!--Configuración-->
+                    <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
+                        <li class="nav-item dropdown text-center">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-gear"></i>                   
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Modificar contraseña</a></li>
+                                <li><a class="dropdown-item" href="#">Modificar perfil</a></li>
+                            </ul>
+                            <p>Configuración</p> 
+                        </li>
+<!--Logout-->
+                        <li class="nav-item text-center ms-5">
+                            <a class="nav-link" (click)="logOut()"><i class="bi bi-box-arrow-right"></i></a>
+                            <p>Salir</p> 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>

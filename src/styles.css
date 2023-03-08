@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --green: #70D0B2;
+    --yellow: #E4E782;
+    --mustard: #FFD75C;
+    --darkerGreen:#476E61;
+    --grey:#F7F7F7;
+    --black: #000000;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.bodySpot{
+    height: 80%;
+}
+
+.headerSpot{
+    height: 10%;
+}
+
+.footerSpot{
+    height: 10%;
+    background: var(--yellow);
+}
+
+.myHeader{
+    background: var(--yellow);
+}
+
+.btn-primary{
+    background-color: var(--darkerGreen);
+    border-color: var(--darkerGreen);
+    color: var(--grey);
+    text-emphasis-style: bold;
+}
+
+.btn-primary:hover{
+    background-color: var(--mustard);
+    border-color: var(--darkerGreen);
+    color: var(--black);
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn{
+    background-color: var(--darkerGreen);
+    border-color: var(--darkerGreen);
+}
+
+.presentation p{
+    text-align: justify;
+    text-indent: 20px;
+}
+
+i {
+    font-weight:bold;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+
+.active>.page-link{
+    background-color: var(--darkerGreen);
+    border-color: var(--darkerGreen);
+}
+
+.page-link{
+    color: var(--darkerGreen);
+}
+
+.icons-btn{
+    font-size: small;
+}
