@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Credential } from '../interfaces/credential.interface';
 import { environment } from 'src/environments/environment.prod';
+import { User } from '../interfaces/user.interface';
 
 
 @Injectable({
@@ -28,5 +29,17 @@ export class AuthenticationService {
   logOut(){
     localStorage.removeItem('authenticated');
     localStorage.removeItem('token');
+    localStorage.removeItem('loggedUser');
+  }
+
+  isAdmin() {
+    const user:string | null = localStorage.getItem('loggedUser');
+
+    if(user){
+      const parsedUser: User = JSON.parse(user);
+      return parsedUser.role ==='ADMIN'    
+    }else{
+      return false;
+    }
   }
 }

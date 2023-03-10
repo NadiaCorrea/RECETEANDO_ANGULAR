@@ -17,16 +17,8 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.bodySpot{
-    height: 80%;
-}
-
-.headerSpot{
-    height: 10%;
-}
-
-.footerSpot{
-    height: 10%;
+.myFooter{
+    margin-top: 5px;
     background: var(--yellow);
 }
 
@@ -63,7 +55,6 @@ i {
     cursor: pointer;
 }
 
-
 .active>.page-link{
     background-color: var(--darkerGreen);
     border-color: var(--darkerGreen);
@@ -75,4 +66,73 @@ i {
 
 .icons-btn{
     font-size: small;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+  }
+
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  
+td, th {
+    width: 25%;
+    text-align: center;
+  }
+
+
+  .mat-table{
+    background-color: var(--grey);
+    text-align: center;
+  }
+
+  .mat-header-cell{
+    color: var(--black);
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+
+
+  .mat-cell{
+    color: var(--black);
+  }
+
+  mat-label{
+    color: var(--black);
+  }
+
+  .filter{
+    width: 100%;
+  }
+
+  .filterInput{
+    border-color: #000000;
+  }
+
+  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: var(--yellow);
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: var(--yellow);
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple{
+    background-color: var(--yellow);
+}
+
+.mat-paginator {
+    background: var(--darkerGreen);
+    font-size: small;
+} 
+th.mat-header-cell {
+    text-align: center!important;
+}
+.mat-sort-header-container{
+    justify-content: center;
 }

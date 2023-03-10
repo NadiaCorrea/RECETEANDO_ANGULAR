@@ -4,7 +4,7 @@ import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { ShowingElementsService } from '../../services/showing-elements.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     }, {Validators:[this.passwordValidator()]});
 
-  constructor(private fb:FormBuilder, private userService: UserService, private router:Router, private showingElements:ShowingElementsService) { }
+  constructor(private fb:FormBuilder, private userService: UserService, private router:Router, private showingElements:SearchService) { }
 
   ngOnInit(): void {
     this.showingElements.hide();

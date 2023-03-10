@@ -23,6 +23,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.pages = new Array(this.totalPages);
+    this.selected = 1;
   }
 
   onSelect(selection:number){

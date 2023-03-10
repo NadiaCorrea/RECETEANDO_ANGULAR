@@ -6,8 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UserRoutingModule } from './user-routing.module';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,12 @@ import { UserRoutingModule } from './user-routing.module';
     CommonModule,
     FormsModule, 
     RouterModule,
-    UserRoutingModule
+    UserRoutingModule, 
+    MatTableModule, 
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSortModule
   ]
 })
 export class UserModule { }

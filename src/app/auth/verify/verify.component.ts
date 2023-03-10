@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-import { ShowingElementsService } from '../../services/showing-elements.service';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-verify',
@@ -10,7 +10,7 @@ import { ShowingElementsService } from '../../services/showing-elements.service'
 })
 export class VerifyComponent implements OnInit {
 
-  constructor(private router:Router, private userService: UserService, private route:ActivatedRoute, private showingElements:ShowingElementsService) { }
+  constructor(private router:Router, private userService: UserService, private route:ActivatedRoute, private showingElements:SearchService) { }
 
   ngOnInit(): void {
 

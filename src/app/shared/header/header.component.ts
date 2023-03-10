@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ShowingElementsService } from '../../services/showing-elements.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SearchService } from '../../services/search.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   
-  constructor(public showingService: ShowingElementsService, private authService:AuthenticationService, private router:Router) { }
+  keyword :string = '';
+
+  @ViewChild('myForm') myForm !: NgForm;
+
+  constructor(public searchService: SearchService, public authService:AuthenticationService, private router:Router) { }
+
 
   ngOnInit(): void {
   }
@@ -22,4 +28,14 @@ export class HeaderComponent implements OnInit {
   isLoggedIn(){
     return this.authService.isAuthenticated();
   }
+
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
+  search(){
+    this.searchService.search(this.keyword);
+  }
+
+  
 }

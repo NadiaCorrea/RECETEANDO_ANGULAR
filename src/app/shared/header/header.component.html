@@ -11,16 +11,24 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-<!--Buscador-->
+<!--Enlaces-->
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
+<!--Recetas-->
                         <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/recipe']">
                             <i class="bi bi-journal-richtext"></i></a>
                         <p>Recetas</p>
                         </li>
+<!--Usuarios-->
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/user/list']">
+                            <i class="bi bi-people"></i></a>
+                        <p>Usuarios</p>
+                        </li>
                     </ul>
-                    <form class="d-flex ms-5" role="search" *ngIf="showingService.showingStatus()">
-                        <input class="form-control me-2" type="search" placeholder="Búsqueda" aria-label="Search" size="50">
+<!--Buscador-->
+                    <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search" *ngIf="searchService.showingStatus()">
+                        <input class="form-control me-2" type="search" [(ngModel)]="keyword"
+                        name="keyword"   placeholder="Búsqueda" aria-label="Search" size="50">
                         <button class="btn btn-outline-success" type="submit">Buscar</button>
                     </form>
 <!--Configuración-->

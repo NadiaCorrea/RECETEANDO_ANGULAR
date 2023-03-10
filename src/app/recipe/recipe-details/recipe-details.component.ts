@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { ShowingElementsService } from '../../services/showing-elements.service';
+import { SearchService } from '../../services/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../../interfaces/recipe.interface';
 import Swal from 'sweetalert2';
@@ -45,7 +45,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   recipeFormGroup: FormGroup;
 
-  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService,private showingService: ShowingElementsService, private route:ActivatedRoute, private fb:FormBuilder) {
+  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService,private searchService: SearchService, private route:ActivatedRoute, private fb:FormBuilder) {
 
     //estructura del formulario
     this.recipeFormGroup = this.fb.group({
@@ -60,7 +60,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   // cuando se carga la página
   ngOnInit(): void {
-    this.showingService.hide();
+    this.searchService.hide();
 
     //recupera el parametro de la URL id
     this.route.params.subscribe(params =>{
@@ -228,7 +228,8 @@ export class RecipeDetailsComponent implements OnInit {
       const formData = new FormData();
       formData.append('file', this.file);
       this.formGroupToBackRecipe();
-      formData.append('recipe', JSON.stringify(this.backRecipe));
+      const userBlob = new Blob([JSON.stringify(this.backRecipe)], {type:'application/json'});
+      formData.append('recipe', userBlob);
       
       this.recipeService.updateRecipe(formData, this.id).subscribe({
         next:(resp =>{
@@ -242,6 +243,7 @@ export class RecipeDetailsComponent implements OnInit {
           this.router.navigate(['/recipe']);
         }),
         error:(error =>{
+          console.log(error)
           Swal.fire({
             icon: 'error',
             title: '¡Ups!',

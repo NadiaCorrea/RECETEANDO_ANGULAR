@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 import { environment } from 'src/environments/environment.prod';
 import { ChangePassword } from '../interfaces/changePassword.interface';
+import { Page } from '../interfaces/page.interface';
 
 
 
@@ -18,7 +19,11 @@ export class UserService {
 
 
   getUsers():Observable<User[]>{
-    return this.http.get<User[]>(`${this.url}/user`)
+    return this.http.get<User[]>(`${this.url}/user/list`)
+  }
+
+  getUsersPaged(pageNumber:number =1, sizeNumber:number=6, sortField:string = "name", keyword: string =""):Observable<Page<User>>{
+    return this.http.get<Page<User>>(`${this.url}/user?pageNumber=${pageNumber}&sizeNumber=${sizeNumber}&sortField=${sortField}&keyword=${keyword}`)
   }
 
   getUser(userId:number):Observable<User>{
@@ -43,5 +48,10 @@ export class UserService {
 
   getLoggedUser():Observable<User>{
     return this.http.get<User>(`${this.url}/me`);
+  }
+
+  deleteUser(userId:any):Observable<any>{
+    return this.http.delete<any>(`${this.url}/user/${userId}`);
+
   }
 }

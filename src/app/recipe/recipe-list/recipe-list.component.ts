@@ -3,8 +3,9 @@ import { RecipeService } from '../../services/recipe.service';
 import { Router } from '@angular/router';
 import { Page } from '../../interfaces/page.interface';
 import { Recipe } from '../../interfaces/recipe.interface';
-import { ShowingElementsService } from '../../services/showing-elements.service';
+import { SearchService } from '../../services/search.service';
 import Swal from 'sweetalert2';
+import { filter} from 'rxjs'
 
 @Component({
   selector: 'app-recipe-list',
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 
 export class RecipeListComponent implements OnInit {
+
+  private keyword :string = '';
 
   recipes: Page<Recipe> = {
     content: [],
@@ -24,28 +27,28 @@ export class RecipeListComponent implements OnInit {
     numberOfElements:0
   };
 
-  constructor(private recipeService:RecipeService, private router:Router, private showingService: ShowingElementsService) { }
+  constructor(private recipeService:RecipeService, private router:Router, private searchService: SearchService) { }
 
   ngOnInit(): void {
-    this.showingService.show();
+    this.searchService.show();
 
-    this.recipeService.getRecipes().subscribe({
-      next:(resp) =>{
-        this.recipes = resp;
-      },
-      error:(error) =>{
-        Swal.fire({
-          title: '¡Error!',
-          text: 'Ha habido un fallo al obtener las recetas.',
-          icon: 'error'
-        });
+    this.getRecipePage();
+
+    this.searchService.searchObservable.pipe(filter(value => value !== null)).subscribe({
+      next:(resp)=>{
+        this.keyword = resp;
+        this.getRecipePage(1, 6, "name");
+      }, 
+      error:(error) => {
+        console.log(error);
       }
-    })
+    });
+
   }
 
 
-  getRecipePage(page: number){
-    this.recipeService.getRecipes(page).subscribe({
+  getRecipePage(pageNumber:number = 1, sizeNumber:number = 6, sortField:string = "name"){
+    this.recipeService.getRecipes(pageNumber, sizeNumber, sortField, this.keyword).subscribe({
       next:(resp) =>{
         this.recipes = resp;
       },
