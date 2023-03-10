@@ -29,7 +29,7 @@
                     <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search" *ngIf="searchService.showingStatus()">
                         <input class="form-control me-2" type="search" [(ngModel)]="keyword"
                         name="keyword"   placeholder="Búsqueda" aria-label="Search" size="50">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        <button class="btn btn-primary" type="submit">Buscar</button>
                     </form>
 <!--Configuración-->
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
