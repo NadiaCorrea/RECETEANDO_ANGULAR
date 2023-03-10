@@ -1,4 +1,12 @@
 <div class="container mt-5">
+<!--Title-->
+    <div class="row text-center mb-5">
+        <div class="col-12">
+            <h1 >Detalles de la Receta</h1>
+        </div>
+    </div>
+<!--Form-->
+    <div class="row">
     <form [formGroup]="recipeFormGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
 <!--Recipe Photo-->
         <div class="row mt-3">
@@ -114,4 +122,5 @@
         </div>
 
     </form>
+</div>
 </div>
