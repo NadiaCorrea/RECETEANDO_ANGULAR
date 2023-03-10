@@ -42,4 +42,17 @@ export class AuthenticationService {
       return false;
     }
   }
+
+  isSameUser(id:number | undefined){
+
+    const user:string | null = localStorage.getItem('loggedUser');
+
+    if(user){
+      const parsedUser: User = JSON.parse(user);
+      return  parsedUser.userId === id
+    }else{
+      return false;
+    }
+  }
+
 }

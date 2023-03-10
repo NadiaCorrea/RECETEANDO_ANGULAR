@@ -4,7 +4,7 @@ import { RecipeIngredient } from './recipeIngredient.interface';
 
 export interface Recipe{
     recipeId ?: number;
-    userId ?: User;
+    user: User;
     name: string;
     description: string;
     photo: string;

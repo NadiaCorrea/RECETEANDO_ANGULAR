@@ -11,7 +11,7 @@
             <div class="col-8">
 <!--Recipe name-->
                 <label for="recipeName"><h3>*Nombre de la receta:</h3></label>
-                <input  class="input-group mb-3" formControlName="recipeName" name="name" type="text" maxlength="100">
+                <input  class="input-group mb-3" formControlName="recipeName" name="name" type="text" maxlength="100" [readOnly]="!canEdit">
                 <div class="link-danger mb-3">
                     <span *ngIf="recipeFormGroup.controls['recipeName'].errors?.['required']">*El nombre de la receta es obligatorio y no debe tenber más de 100 caracteres.</span>
                 </div>
@@ -20,13 +20,13 @@
 <!--Recipe description-->
                 <label for="recipeDescription"><h3>*Descripción:</h3></label>
                 <div class="form-floating mb-3">
-                    <textarea formControlName="recipeDescription" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: fit-content;" maxlength="250"></textarea>
+                    <textarea formControlName="recipeDescription" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: fit-content;" maxlength="250" [readOnly]="!canEdit"></textarea>
                 </div>
                 <div class="link-danger mb-3">
                     <span *ngIf="recipeFormGroup.controls['recipeDescription'].errors?.['required']">*La descripción de la receta es obligatoria y no debe de tener más de 250 caracteres.</span>
                 </div>
 <!--Recipe photo to upload-->
-                <div class="input-group mb-3">
+                <div class="input-group mb-3" *ngIf="canEdit">
                     <input formControlName="recipePhoto" type="file" class="form-control" (change)="uploadFile($event)">
                     <label class="input-group-text" for="recipePhoto">Subir nueva foto</label>
                 </div>
@@ -42,13 +42,13 @@
                         <th scope="col">Cantidad</th>
                         <th scope="col">Unidad</th>
                         <th scope="col">Ingrediente</th>
-                        <th scope="col">Acción</th>
+                        <th scope="col" *ngIf="canEdit">Acción</th>
                     </tr>
                     </thead>
                     <tbody >
                     <tr *ngFor="let recipeIngredient of recipeIngredients.controls; let i = index" [formGroupName]="i">
                         <td>
-                            <input formControlName="ingredientQuantity" class="form-control" type="number" name="quantity" style="max-width: 100px" min="1" required>
+                            <input formControlName="ingredientQuantity" class="form-control" type="number" name="quantity" style="max-width: 100px" min="1" required [readOnly]="!canEdit">
                             <div class="link-danger mb-3">
                                 <span *ngIf="!isValidQuantity(i)">*La cantidad del ingrediente es obligatoria.</span>
                             </div>
@@ -69,16 +69,16 @@
                                 <span *ngIf="!isValidIngredientId(i)">*El ingrediente es obligatorio.</span>
                             </div>
                         </td>
-                        <td>
-                           <button (click)="removeRecipeIngredient(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button> 
+                        <td *ngIf="canEdit">
+                           <button (click)="removeRecipeIngredient(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
                         </td>
                     </tr>
                    
                     </tbody>
                 </table>
             </div>
-            <div class="col-2">
-                <button class="btn btn-primary" (click)="addRecipeIngredients()"><i class="bi bi-file-plus icons-btn"></i> Añadir ingrediente</button>
+            <div class="col-2"  *ngIf="canEdit">
+                <button type= "button" class="btn btn-primary" (click)="addRecipeIngredients()"><i class="bi bi-file-plus icons-btn"></i> Añadir ingrediente</button>
             </div>
         </div>
 <!--RecipeSteps[]-->
@@ -87,25 +87,25 @@
                 <h2 class="mb-5">Pasos</h2>
                 <div class="row mt-2" *ngFor="let step of steps.controls; let i = index" [formGroupName]="i">
                     <div class="col-2">
-                        <input class="form-control" type="number" name="orderNum" id="orderNum" formControlName="orderNum" style="max-width: 100px" min="1">
+                        <input class="form-control" type="number" name="orderNum" id="orderNum" formControlName="orderNum" style="max-width: 100px" min="1" [readOnly]="!canEdit">
                         <span class="link-danger mb-3" *ngIf="!isValidOrderNum(i)">*El número de orden es obligatorio.</span>
                     </div>
                     <div class="col-8 form-floating mb-3">
-                        <textarea class="form-control" placeholder="Añade la descripción aquí" id="floatingTextarea2" formControlName="detail" name="detail" style="height: fit-content;" maxlength="300"></textarea>
+                        <textarea class="form-control" placeholder="Añade la descripción aquí" id="floatingTextarea2" formControlName="detail" name="detail" style="height: fit-content;" maxlength="300"  [readOnly]="!canEdit"></textarea>
                         <span class="link-danger mb-3" *ngIf="!isValidText(i)">*El detalle del paso es obligatorio.</span>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2" *ngIf="canEdit">
                         <button (click)="removeStep(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button> 
                     </div>
                 </div>
             </div>
-            <div class="col-2 justify-content-end">
-                <button class="btn btn-primary" (click)="addSteps()"> <i class="bi bi-file-plus icons-btn"></i> Añadir paso</button>
+            <div class="col-2 justify-content-end" *ngIf="canEdit">
+                <button type= "button" class="btn btn-primary" (click)="addSteps()"> <i class="bi bi-file-plus icons-btn"></i> Añadir paso</button>
             </div>
         </div>
 <!--Submit and cancel buttons-->
-        <div class="row mt-5 text-center">
-            <div class="col-6">
+        <div class="row mt-5 text-center" >
+            <div class="col-6" *ngIf="canEdit">
                 <button class="btn btn-primary" type="submit" [disabled]="recipeFormGroup.invalid">Guardar</button>
             </div>
             <div class="col-6">

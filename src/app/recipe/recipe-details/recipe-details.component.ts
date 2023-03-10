@@ -7,10 +7,13 @@ import Swal from 'sweetalert2';
 import { IngredientService } from '../../services/ingredient.service';
 import { Ingredient } from '../../interfaces/ingredient.interface';
 import { Units } from '../../interfaces/units.enum';
-import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { RecipeIngredient } from '../../interfaces/recipeIngredient.interface';
 import { Step } from 'src/app/interfaces/step.interface';
 import { BackRecipe } from '../../interfaces/backRecipe.interface';
+import { User } from '../../interfaces/user.interface';
+import { UserService } from '../../services/user.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -34,7 +37,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   recipe:Recipe = {
     recipeId : 0,
-    userId: {username:'', email:'',name:''},
+    user: {username:'', email:'',name:''},
     name: "",
     description: "",
     photo: "",
@@ -44,8 +47,9 @@ export class RecipeDetailsComponent implements OnInit {
   };
 
   recipeFormGroup: FormGroup;
+  canEdit :boolean = false;
 
-  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService,private searchService: SearchService, private route:ActivatedRoute, private fb:FormBuilder) {
+  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService,private searchService: SearchService, private authService:AuthenticationService, private route:ActivatedRoute, private fb:FormBuilder) {
 
     //estructura del formulario
     this.recipeFormGroup = this.fb.group({
@@ -79,6 +83,8 @@ export class RecipeDetailsComponent implements OnInit {
       next:(resp) =>{
         //guarda respuesta en el objeto receta
         this.recipe = resp;
+        //verificando si el usuario es dueño de la receta o no
+        this.canEdit = this.authService.isSameUser(this.recipe.user.userId)
         //asigna el valor del nombre de la receta 
         this.recipeFormGroup.controls['recipeName'].setValue(this.recipe.name);
         //asigna el valor de la descripción de la receta 
@@ -134,8 +140,8 @@ export class RecipeDetailsComponent implements OnInit {
     getRecipeIngredient(recipeIngredient: RecipeIngredient):FormGroup{
       return this.fb.group({
         ingredientQuantity: [recipeIngredient.quantity, Validators.required],
-        ingredientUnit:[recipeIngredient.unit, Validators.required],
-        ingredientId:[recipeIngredient.ingredientId.ingredientId, Validators.required]
+        ingredientUnit:new FormControl({value: recipeIngredient.unit, disabled: !this.canEdit}, Validators.required),
+        ingredientId: new FormControl({value: recipeIngredient.ingredientId.ingredientId, disabled: !this.canEdit}, Validators.required)
       })
     }
 
@@ -160,8 +166,8 @@ export class RecipeDetailsComponent implements OnInit {
 
     getStep(step: Step):FormGroup{
       return this.fb.group({
-        orderNum: [step.orderNum, Validators.required],
-        detail:[step.detail, Validators.required],
+        orderNum:  [step.orderNum, Validators.required],
+        detail:  [step.detail, Validators.required]
       })
     }
 
@@ -254,6 +260,8 @@ export class RecipeDetailsComponent implements OnInit {
 
     }
 
+
+    
   
   }
   

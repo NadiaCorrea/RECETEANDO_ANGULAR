@@ -14,7 +14,8 @@
 }
 
 *{
-    font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .myFooter{
@@ -49,7 +50,7 @@
     text-indent: 20px;
 }
 
-i {
+i{
     font-weight:bold;
     font-size: 1.5em;
     cursor: pointer;
@@ -73,49 +74,46 @@ table {
     text-align: center;
   }
 
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
-  
 td, th {
-    width: 25%;
-    text-align: center;
+  width: 25%;
+  text-align: center;
   }
 
 
-  .mat-table{
-    background-color: var(--grey);
-    text-align: center;
-  }
+.mat-table{
+  background-color: var(--grey);
+  text-align: center;
+}
 
-  .mat-header-cell{
-    color: var(--black);
-    font-size: 16px;
-    font-weight: bold;
-  }
+.mat-header-cell{
+  color: var(--black);
+  font-size: 16px;
+  font-weight: bold;
+}
 
+.mat-cell{
+  color: var(--black);
+}
 
+mat-label{
+  color: var(--black);
+}
 
-  .mat-cell{
-    color: var(--black);
-  }
+.filter{
+  width: 100%;
+}
 
-  mat-label{
-    color: var(--black);
-  }
+.filterInput{
+  border-color: #000000;
+}
 
-  .filter{
-    width: 100%;
-  }
-
-  .filterInput{
-    border-color: #000000;
-  }
-
-  .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-    color: var(--yellow);
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: var(--yellow);
 }
 
 .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
@@ -130,9 +128,11 @@ td, th {
     background: var(--darkerGreen);
     font-size: small;
 } 
+
 th.mat-header-cell {
     text-align: center!important;
 }
+
 .mat-sort-header-container{
     justify-content: center;
 }
