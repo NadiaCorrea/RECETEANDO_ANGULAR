@@ -62,8 +62,8 @@
                             </div>
                         </td>
                         <td>
-                            <select formControlName="ingredientUnit" class="form-control" name="unit" required>
-                                <option *ngFor="let unit of units| keyvalue" [value]="unit.key">{{unit.value}}</option>
+                            <select formControlName="ingredientUnit" class="form-control" required>
+                                <option *ngFor="let unit of listUnits" [value]="unit.unitId">{{unit.abreviation}}</option>
                             </select>
                             <div class="link-danger mb-3">
                                 <span *ngIf="!isValidUnit(i)">*La unidad del ingrediente es obligatoria.</span>

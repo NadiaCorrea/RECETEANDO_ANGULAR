@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Editar unidad</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="info.name">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="info.abreviation">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="info" cdkFocusInitial>Modificar</button>
+</div>
+

@@ -24,6 +24,12 @@
                             <i class="bi bi-people"></i></a>
                         <p>Usuarios</p>
                         </li>
+<!--Unidades-->
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/unit/list']">
+                            <i class="bi bi-file-spreadsheet"></i></a>
+                        <p>Unidades</p>
+                        </li>
+
                     </ul>
 <!--Buscador-->
                     <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search" *ngIf="searchService.showingStatus()">

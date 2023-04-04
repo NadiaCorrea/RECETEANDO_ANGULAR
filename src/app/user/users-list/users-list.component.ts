@@ -50,7 +50,6 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   }
 
   removeUser(id:number){
-    console.log(id)
     Swal.fire({
       title: '¿Estás seguro de querer eliminar este usuario?',
       text: "No será posible revertir este cambio.",
