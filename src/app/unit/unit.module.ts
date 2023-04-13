@@ -12,11 +12,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { UnitRoutingModule } from './unit-routing.module';
 import { UnitEditComponent } from './unit-edit/unit-edit.component';
+import { UnitAddComponent } from './unit-add/unit-add.component';
 
 @NgModule({
     declarations:[
         UnitListComponent,
-        UnitEditComponent
+        UnitEditComponent,
+        UnitAddComponent
     ],
     imports:[
         CommonModule,

@@ -153,3 +153,7 @@ th.mat-header-cell {
 .mat-sort-header-container{
     justify-content: center;
 }
+
+.inputCenter{
+  justify-self: center;
+}

@@ -63,7 +63,6 @@ export class RegisterComponent implements OnInit {
 
   this.userService.addUser(newUser).subscribe({
     next:(resp) =>{
-      console.log(resp);
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -74,9 +73,8 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/']);
     },
     error:(error) =>{
-      console.log(error.error.message);
       Swal.fire({
-        title: 'Error!',
+        title: 'Ha acurrido un error',
         text: `${error.error.message}`,
         icon: 'error'
       });

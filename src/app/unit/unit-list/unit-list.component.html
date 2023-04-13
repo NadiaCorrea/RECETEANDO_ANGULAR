@@ -5,11 +5,18 @@
       </div>
     </div>
   
+  <div class="row justify-content-between mb-5">
+    <div class="col-9">
+      <mat-form-field class="mat-form-field-should-float mat-focused filter">
+        <mat-label>Filtro de búsqueda</mat-label>
+        <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: busca" #input>
+      </mat-form-field>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary btn-md" [routerLink]="['/unit/add']"><i class="bi bi-file-plus"></i> Añadir</button>
+    </div>
+  </div>
   
-  <mat-form-field class="mat-form-field-should-float mat-focused filter">
-      <mat-label>Filtro de búsqueda</mat-label>
-      <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: busca" #input>
-    </mat-form-field>
     
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort style="text-align: center;">
