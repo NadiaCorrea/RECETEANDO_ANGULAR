@@ -157,3 +157,8 @@ th.mat-header-cell {
 .inputCenter{
   justify-self: center;
 }
+
+.mat-dialog-container{
+  background: #fff;
+  color: var(--black);
+}

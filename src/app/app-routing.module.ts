@@ -32,6 +32,11 @@ const routes: Routes = [
     loadChildren:() => import('./unit/unit.module').then(m => m.UnitModule)
   },
   {
+    path:'category', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
     path:'**', 
     component:NotFoundComponent
   }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { SearchService } from '../../services/search.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../../interfaces/recipe.interface';
 import Swal from 'sweetalert2';
@@ -48,7 +47,7 @@ export class RecipeDetailsComponent implements OnInit {
   recipeFormGroup: FormGroup;
   canEdit :boolean = false;
 
-  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService, private unitServ:UnitService,private searchService: SearchService, private authService:AuthenticationService, private route:ActivatedRoute, private fb:FormBuilder) {
+  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService, private unitServ:UnitService, private authService:AuthenticationService, private route:ActivatedRoute, private fb:FormBuilder) {
 
     //estructura del formulario
     this.recipeFormGroup = this.fb.group({
@@ -63,9 +62,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   // cuando se carga la página
   ngOnInit(): void {
-    this.searchService.hide();
-
-    //recupera el parametro de la URL id
+       //recupera el parametro de la URL id
     this.route.params.subscribe(params =>{
       this.id = params['id'];
       //método que llama al servicio que obteniene la receta

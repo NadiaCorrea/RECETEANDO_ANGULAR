@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
 import { Router } from '@angular/router';
 import { Page } from '../../interfaces/page.interface';
 import { Recipe } from '../../interfaces/recipe.interface';
-import { SearchService } from '../../services/search.service';
 import Swal from 'sweetalert2';
-import { filter} from 'rxjs'
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,7 +13,9 @@ import { filter} from 'rxjs'
 
 export class RecipeListComponent implements OnInit {
 
-  private keyword :string = '';
+  keyword :string = '';
+
+  @ViewChild('myForm') myForm !: NgForm;
 
   recipes: Page<Recipe> = {
     content: [],
@@ -27,25 +28,15 @@ export class RecipeListComponent implements OnInit {
     numberOfElements:0
   };
 
-  constructor(private recipeService:RecipeService, private router:Router, private searchService: SearchService) { }
+  constructor(private recipeService:RecipeService, private router:Router) { }
 
   ngOnInit(): void {
-    this.searchService.show();
-
     this.getRecipePage();
-
-    this.searchService.searchObservable.pipe(filter(value => value !== null)).subscribe({
-      next:(resp)=>{
-        this.keyword = resp;
-        this.getRecipePage(1, 6, "name");
-      }, 
-      error:(error) => {
-        console.log(error);
-      }
-    });
-
   }
 
+  search(){
+    this.getRecipePage(1, 6, "name");
+  }
 
   getRecipePage(pageNumber:number = 1, sizeNumber:number = 6, sortField:string = "name"){
     this.recipeService.getRecipes(pageNumber, sizeNumber, sortField, this.keyword).subscribe({

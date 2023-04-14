@@ -4,7 +4,6 @@ import { NgForm } from '@angular/forms';
 import { ChangePassword } from '../../interfaces/changePassword.interface';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-update-password',
@@ -17,10 +16,9 @@ export class UpdatePasswordComponent implements OnInit {
 
   @ViewChild('myForm') myForm !: NgForm;
 
-  constructor(private userServ: UserService, private router:Router, private searchService: SearchService) { }
+  constructor(private userServ: UserService, private router:Router) { }
 
   ngOnInit(): void {
-    this.searchService.hide();
   }
 
   notValidField(field:string):boolean {

@@ -1,29 +1,32 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UnitService } from '../../services/unit.service';
+
 import { MatTableDataSource } from '@angular/material/table';
-import { Unit } from '../../interfaces/unit.interface';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
-import { UnitEditComponent } from '../unit-edit/unit-edit.component';
 import { filter } from 'rxjs';
-
+import { Category } from '../../interfaces/category.interface';
+import { CategoryService } from '../../services/category.service';
+import Swal from 'sweetalert2';
+import { CategoryEditComponent } from '../category-edit/category-edit.component';
 
 @Component({
-  selector: 'app-unit-list',
-  templateUrl: './unit-list.component.html'
+  selector: 'app-category-list',
+  templateUrl: './category-list.component.html'
 })
-export class UnitListComponent implements OnInit {
-  displayedColumns: string[] = [ 'name', 'abreviation', 'update', 'delete'];
-  dataSource: MatTableDataSource<Unit>;
+
+export class CategoryListComponent implements OnInit {
+
+  displayedColumns: string[] = [ 'name', 'description', 'update', 'delete'];
+
+  dataSource: MatTableDataSource<Category>;
 
   @ViewChild(MatPaginator) paginator :any = MatPaginator;
   @ViewChild(MatSort) sort: any = MatSort;
 
-  constructor(private unitServ:UnitService, public dialog: MatDialog) {
-    const units: Unit [] = [];
-    this.dataSource = new MatTableDataSource(units);
+  constructor(private categoryServ:CategoryService, public dialog:MatDialog) {
+    const categories:Category[] =[];
+    this.dataSource = new MatTableDataSource(categories);
    }
 
   ngOnInit(): void {
@@ -34,7 +37,7 @@ export class UnitListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   
-    this.unitServ.getUnits().subscribe({
+    this.categoryServ.getCategories().subscribe({
       next:(resp) =>{
         this.dataSource.data = resp;
       }
@@ -50,30 +53,31 @@ export class UnitListComponent implements OnInit {
     }
   }
 
-deleteUnit(id:number){
+deleteCategory(id:number){
   Swal.fire({
-    title: '¿Estás seguro de querer eliminar esta unidad?',
+    title: '¿Estás seguro de querer eliminar esta categoría?',
     text: "No será posible revertir este cambio.",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#476E61',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Sí, eliminar.'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.unitServ.deleteUnit(id).subscribe({
+  }).then((result)=>{
+    if(result.isConfirmed){
+      this.categoryServ.deleteCategory(id).subscribe({
         next:(resp) =>{
           Swal.fire(
             'Eliminada',
-            'La unidad ha sido eliminado',
+            'La categoría ha sido eliminado',
             'success'
           )
-          this.unitServ.getUnits().subscribe({
+          this.categoryServ.getCategories().subscribe({
             next:(resp) =>{
               this.dataSource.data = resp;
             }
           })
-        }, error:(error)=>{
+        },
+        error:(error) =>{
           Swal.fire({
             icon: 'error',
             title: '¡Upss!',
@@ -85,22 +89,22 @@ deleteUnit(id:number){
   })
 }
 
-updateUnit(unit: Unit){
-  const dialogRef = this.dialog.open(UnitEditComponent, {
-    width: '600px',
-    data: unit
+updateCategory(category:Category){
+  const dialogRef = this.dialog.open(CategoryEditComponent,{
+    width:'600 px',
+    data: category
   });
 
-  dialogRef.afterClosed().pipe(filter(data => data !== undefined)).subscribe(result => {
-    this.unitServ.updateUnit(result).subscribe({
+  dialogRef.afterClosed().pipe(filter(data => data !== undefined)).subscribe(result =>{
+    this.categoryServ.updateCategory(result).subscribe({
       next:(resp)=>{
         Swal.fire(
           'Guardada',
-          'La unidad ha sido modificada',
+          'La categoría ha sido modificada',
           'success'
         )
-        this.unitServ.getUnits().subscribe({
-          next:(resp) =>{
+        this.categoryServ.getCategories().subscribe({
+          next:(resp)=>{
             this.dataSource.data = resp;
           }
         })
@@ -113,8 +117,12 @@ updateUnit(unit: Unit){
         })
       }
     })
-  });
+  })
+
+
 
 }
+
+
 
 }

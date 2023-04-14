@@ -4,7 +4,7 @@ import { User } from '../../interfaces/user.interface';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SearchService } from '../../services/search.service';
+
 
 @Component({
   selector: 'app-update-profile',
@@ -21,12 +21,9 @@ export class UpdateProfileComponent implements OnInit {
 
   @ViewChild('myForm') myForm !: NgForm;
 
-  constructor(private userSer: UserService, private router:Router, private searchService: SearchService) { }
+  constructor(private userSer: UserService, private router:Router) { }
 
   ngOnInit(): void {
-
-    this.searchService.hide();
-
     this.userSer.getLoggedUser().subscribe({
       next:(resp)=>{
         this.user = resp;
