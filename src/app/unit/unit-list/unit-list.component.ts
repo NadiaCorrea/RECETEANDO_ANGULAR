@@ -58,16 +58,18 @@ deleteUnit(id:number){
     showCancelButton: true,
     confirmButtonColor: '#476E61',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, eliminar.'
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
   }).then((result) => {
     if (result.isConfirmed) {
       this.unitServ.deleteUnit(id).subscribe({
         next:(resp) =>{
-          Swal.fire(
-            'Eliminada',
-            'La unidad ha sido eliminado',
-            'success'
-          )
+          Swal.fire({
+            title: 'Eliminada',
+            text: 'La unidad ha sido eliminada',
+            icon:'success',
+            confirmButtonColor: '#476E61'
+        })
           this.unitServ.getUnits().subscribe({
             next:(resp) =>{
               this.dataSource.data = resp;
