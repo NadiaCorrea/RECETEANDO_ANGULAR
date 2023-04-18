@@ -34,7 +34,13 @@
                             <i class="bi bi-tags"></i></a>
                         <p>Categorías</p>
                         </li>
+<!--Ingredientes-->
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/ingredient/list']">
+                            <i class="bi bi-card-list"></i></a>
+                        <p>Ingredientes</p>
+                        </li>                       
                     </ul>
+
 <!--Configuración-->
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
                         <li class="nav-item dropdown text-center">

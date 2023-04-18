@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { UnitListComponent } from './unit-list/unit-list.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { UnitListComponent } from './unit-list/unit-list.component';
 import { UnitRoutingModule } from './unit-routing.module';
 import { UnitEditComponent } from './unit-edit/unit-edit.component';
 import { UnitAddComponent } from './unit-add/unit-add.component';
@@ -29,9 +29,9 @@ import { UnitAddComponent } from './unit-add/unit-add.component';
         MatFormFieldModule,
         MatInputModule,
         MatSortModule,
-        UnitRoutingModule,
-        MatDialogModule
-      
+        MatDialogModule,
+        UnitRoutingModule
+        
     ]
 })
 export class UnitModule{ }

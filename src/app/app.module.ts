@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UnitModule } from './unit/unit.module';
 import { UnitService } from './services/unit.service';
 import { CategoryModule } from './category/category.module';
+import { IngredientService } from './services/ingredient.service';
+import { IngredientModule } from './ingredient/ingredient.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { CategoryModule } from './category/category.module';
     UserModule,
     BrowserAnimationsModule,
     UnitModule,
-    CategoryModule
+    CategoryModule,
+    IngredientModule
   ],
   providers: [ 
     AuthGuardService,
@@ -43,6 +46,7 @@ import { CategoryModule } from './category/category.module';
     UserService,
     RecipeService,
     UnitService,
+    IngredientService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

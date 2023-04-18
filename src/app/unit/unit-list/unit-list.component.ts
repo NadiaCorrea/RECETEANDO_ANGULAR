@@ -96,11 +96,12 @@ updateUnit(unit: Unit){
   dialogRef.afterClosed().pipe(filter(data => data !== undefined)).subscribe(result => {
     this.unitServ.updateUnit(result).subscribe({
       next:(resp)=>{
-        Swal.fire(
-          'Guardada',
-          'La unidad ha sido modificada',
-          'success'
-        )
+        Swal.fire({
+          title:'Guardada',
+          text:'La unidad ha sido modificada',
+          icon:'success',
+          confirmButtonColor: '#476E61'
+      })
         this.unitServ.getUnits().subscribe({
           next:(resp) =>{
             this.dataSource.data = resp;

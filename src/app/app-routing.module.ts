@@ -37,6 +37,11 @@ const routes: Routes = [
     loadChildren:() => import('./category/category.module').then(m => m.CategoryModule)
   },
   {
+    path:'ingredient', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./ingredient/ingredient.module').then(m => m.IngredientModule)
+  },
+  {
     path:'**', 
     component:NotFoundComponent
   }
