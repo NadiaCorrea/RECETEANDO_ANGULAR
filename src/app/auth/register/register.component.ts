@@ -4,7 +4,6 @@ import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-register',
@@ -20,10 +19,10 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     }, {Validators:[this.passwordValidator()]});
 
-  constructor(private fb:FormBuilder, private userService: UserService, private router:Router, private showingElements:SearchService) { }
+  constructor(private fb:FormBuilder, private userService: UserService, private router:Router) { }
 
   ngOnInit(): void {
-    this.showingElements.hide();
+
    }
 
   notValidField(campo:string){
@@ -63,7 +62,6 @@ export class RegisterComponent implements OnInit {
 
   this.userService.addUser(newUser).subscribe({
     next:(resp) =>{
-      console.log(resp);
       Swal.fire({
         position: 'center',
         icon: 'success',
@@ -74,9 +72,8 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/']);
     },
     error:(error) =>{
-      console.log(error.error.message);
       Swal.fire({
-        title: 'Error!',
+        title: 'Ha acurrido un error',
         text: `${error.error.message}`,
         icon: 'error'
       });

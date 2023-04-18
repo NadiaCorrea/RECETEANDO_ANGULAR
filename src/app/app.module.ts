@@ -11,16 +11,18 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { RecipeModule } from './recipe/recipe.module';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticationService } from './services/authentication.service';
-import { SearchService } from './services/search.service';
 import { UserService } from './services/user.service';
 import { RecipeService } from './services/recipe.service';
 import { UserModule } from './user/user.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UnitModule } from './unit/unit.module';
+import { UnitService } from './services/unit.service';
+import { CategoryModule } from './category/category.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,14 +33,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     RecipeModule, 
     UserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    UnitModule,
+    CategoryModule
   ],
   providers: [ 
     AuthGuardService,
     AuthenticationService,
-    SearchService,
     UserService,
     RecipeService,
+    UnitService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

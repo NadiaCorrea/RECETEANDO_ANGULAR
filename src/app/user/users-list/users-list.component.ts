@@ -5,7 +5,6 @@ import {MatTableDataSource} from '@angular/material/table';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
-import { SearchService } from '../../services/search.service';
 
 
 @Component({
@@ -19,14 +18,13 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator :any = MatPaginator;
   @ViewChild(MatSort) sort: any = MatSort;
 
-  constructor(private userServ: UserService, private searchService: SearchService) {
+  constructor(private userServ: UserService) {
 
     const users:User[] = [];
     this.dataSource = new MatTableDataSource(users);
   }
 
   ngOnInit(): void {
-    this.searchService.hide();
   }
 
   ngAfterViewInit() {
@@ -50,7 +48,6 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   }
 
   removeUser(id:number){
-    console.log(id)
     Swal.fire({
       title: '¿Estás seguro de querer eliminar este usuario?',
       text: "No será posible revertir este cambio.",

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SearchService } from '../../services/search.service';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -8,11 +7,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor(private showingElements:SearchService, private authService:AuthenticationService) { }
+  constructor(private authService:AuthenticationService) { }
 
-  ngOnInit(): void {
-    this.showingElements.hide();
-   
+  ngOnInit(): void { 
   }
 
   isLoggedIn(){
