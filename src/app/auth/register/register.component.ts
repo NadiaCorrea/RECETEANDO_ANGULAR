@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -67,6 +68,7 @@ export class RegisterComponent implements OnInit {
         icon: 'success',
         title: 'Tu cuenta ha sido creada. Por favor, revisa tu correo para verificar tu cuenta',
         showConfirmButton: true,
+        confirmButtonColor: '#476E61',
         timer: 3500
       });
       this.router.navigate(['/']);
@@ -75,7 +77,8 @@ export class RegisterComponent implements OnInit {
       Swal.fire({
         title: 'Ha acurrido un error',
         text: `${error.error.message}`,
-        icon: 'error'
+        icon: 'error',
+        confirmButtonColor: '#476E61'
       });
     }
 

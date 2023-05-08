@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/user.interface';
 import Swal from 'sweetalert2';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -32,7 +33,8 @@ export class UpdateProfileComponent implements OnInit {
         Swal.fire({
           title: 'Error!',
           text: 'Ha ocurrido un error inesperado vuleva a intentarlo más tarde.',
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
       }
     })
@@ -52,6 +54,7 @@ export class UpdateProfileComponent implements OnInit {
           icon: 'success',
           title: 'Su perfil ha sido modificado.',
           showConfirmButton: true,
+          confirmButtonColor: '#476E61',
           timer: 3500
         });
         this.router.navigateByUrl('/recipe');
@@ -60,7 +63,8 @@ export class UpdateProfileComponent implements OnInit {
         Swal.fire({
           title: 'Error!',
           text: `${error.error.message}`,
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
       }
     })

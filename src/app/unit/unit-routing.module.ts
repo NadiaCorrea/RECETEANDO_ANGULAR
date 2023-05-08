@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { AdminGuardService } from '../services/admin-guard.service';
 import { UnitListComponent } from './unit-list/unit-list.component';
 import { UnitAddComponent } from './unit-add/unit-add.component';
 import { UnitEditComponent } from './unit-edit/unit-edit.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 
 const routes: Routes = [

@@ -1,7 +1,4 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +10,9 @@ import { UnitListComponent } from './unit-list/unit-list.component';
 import { UnitRoutingModule } from './unit-routing.module';
 import { UnitEditComponent } from './unit-edit/unit-edit.component';
 import { UnitAddComponent } from './unit-add/unit-add.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations:[

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Unit } from '../../interfaces/unit.interface';
 import { UnitService } from '../../services/unit.service';
 import Swal from 'sweetalert2';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-unit-add',
@@ -36,6 +36,7 @@ export class UnitAddComponent implements OnInit {
           icon: 'success',
           title: 'La unidad ha sido añadida.',
           showConfirmButton: true,
+          confirmButtonColor: '#476E61',
           timer: 3500
         });
         this.router.navigate(['/unit/list']);
@@ -44,7 +45,8 @@ export class UnitAddComponent implements OnInit {
         Swal.fire({
           title: 'Ha acurrido un error',
           text: `${error.error.message}`,
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
       }
     });

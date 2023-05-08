@@ -1,1 +1,45 @@
-<p>ingredient-add works!</p>
+<div class="container mt-5">
+    <!--Title-->
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h1 >Añadir ingrediente</h1>
+            </div>
+        </div>
+    <!--Form-->
+        <div class="row justify-content-center">
+            <form (ngSubmit)="addIngredient()" #myForm ="ngForm" autocomplete="off" action="#">
+                <div class="col">
+                    <label for="name"><h4>*Nombre del ingrediente:</h4></label>
+                    <input  class="form-control" name="name" type="text" maxlength="100" [(ngModel)] ="ingredient.name" required>
+                    <div class="link-danger mb-3">
+                        <span class="form-text text-danger" *ngIf="notValidField('name')">El nombre del ingrediente es obligatorio*</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="description"><h4>*Descripción:</h4></label>
+                    <input  class="form-control" name="description" type="text" maxlength="200" [(ngModel)] ="ingredient.description" required>
+                    <div class="link-danger mb-3">
+                        <span class="form-text text-danger" *ngIf="notValidField('description')">La descripción es obligatoria*</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="category.categoryId"><h4>*Categoría:</h4></label>
+                    <select class="form-control" type="number" [(ngModel)] ="category.categoryId"  name="category.categoryId" required>
+                        <option *ngFor="let category of categories" [value] ="category.categoryId">{{category.name}}</option>
+                    </select>
+                    <div class="link-danger mb-3">
+                        <span class="form-text text-danger" *ngIf="notValidField('description')">La categoría es obligatoria*</span>
+                    </div>
+                </div>
+    <!--Buttons-->
+                <div class="row mb-5 text-center" >
+                    <div class="col-6">
+                        <button class="btn btn-primary" type="submit" [disabled]="myForm.invalid">Guardar</button>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-primary" [routerLink]="['/ingredient/list']">Cancelar</a>
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </div>

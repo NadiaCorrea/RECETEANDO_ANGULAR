@@ -1,5 +1,3 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -9,6 +7,7 @@ import { Category } from '../../interfaces/category.interface';
 import { CategoryService } from '../../services/category.service';
 import Swal from 'sweetalert2';
 import { CategoryEditComponent } from '../category-edit/category-edit.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-category-list',
@@ -66,11 +65,12 @@ deleteCategory(id:number){
     if(result.isConfirmed){
       this.categoryServ.deleteCategory(id).subscribe({
         next:(resp) =>{
-          Swal.fire(
-            'Eliminada',
-            'La categoría ha sido eliminado',
-            'success'
-          )
+          Swal.fire({
+            title:'Eliminada',
+            text:'La categoría ha sido eliminado',
+            icon:'success',
+            confirmButtonColor: '#476E61'
+          })
           this.categoryServ.getCategories().subscribe({
             next:(resp) =>{
               this.dataSource.data = resp;
@@ -81,7 +81,8 @@ deleteCategory(id:number){
           Swal.fire({
             icon: 'error',
             title: '¡Upss!',
-            text: `${error.error.message}`
+            text: `${error.error.message}`,
+            confirmButtonColor: '#476E61'
           })
         }
       })
@@ -98,11 +99,12 @@ updateCategory(category:Category){
   dialogRef.afterClosed().pipe(filter(data => data !== undefined)).subscribe(result =>{
     this.categoryServ.updateCategory(result).subscribe({
       next:(resp)=>{
-        Swal.fire(
-          'Guardada',
-          'La categoría ha sido modificada',
-          'success'
-        )
+        Swal.fire({
+          title:'Guardada',
+          text:'La categoría ha sido modificada',
+          icon:'success',
+          confirmButtonColor: '#476E61'
+      })
         this.categoryServ.getCategories().subscribe({
           next:(resp)=>{
             this.dataSource.data = resp;
@@ -113,7 +115,8 @@ updateCategory(category:Category){
         Swal.fire({
           icon: 'error',
           title: '¡Upss!',
-          text: `${error.error.message}`
+          text: `${error.error.message}`,
+          confirmButtonColor: '#476E61'
         })
       }
     })

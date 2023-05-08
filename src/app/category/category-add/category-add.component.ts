@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { Category } from '../../interfaces/category.interface';
 import { CategoryService } from '../../services/category.service';
+import Swal from 'sweetalert2';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-category-add',
@@ -37,6 +37,7 @@ category:Category = {
           icon: 'success',
           title: 'La categoría ha sido añadida.',
           showConfirmButton: true,
+          confirmButtonColor: '#476E61',
           timer: 3500
         });
         this.router.navigate(['/category/list']);
@@ -45,7 +46,8 @@ category:Category = {
         Swal.fire({
           title: 'Ha acurrido un error',
           text: `${error.error.message}`,
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61',
         });
       }
     });

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import  Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
             Swal.fire({
               title: 'Error!',
               text: 'Credenciales incorrectas.',
-              icon: 'error'
+              icon: 'error',
+              confirmButtonColor: '#476E61'
             });
             this.router.navigate(['/auth/login']);
           }});
@@ -57,7 +58,8 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           title: 'Error!',
           text: 'Credenciales incorrectas.',
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
         this.router.navigate(['/auth/login']);
       }

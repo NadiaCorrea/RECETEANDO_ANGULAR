@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -53,18 +53,19 @@ export class UsersListComponent implements OnInit, AfterViewInit {
       text: "No será posible revertir este cambio.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#476E61',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, eliminar.'
     }).then((result) => {
       if (result.isConfirmed) {
         this.userServ.deleteUser(id).subscribe({
           next:(resp) =>{
-            Swal.fire(
-              'Eliminado',
-              'El usuario ha sido eliminado',
-              'success'
-            )
+            Swal.fire({
+              title:'Eliminado',
+              text:'El usuario ha sido eliminado',
+              icon:'success',
+              confirmButtonColor: '#476E61'
+          })
             this.userServ.getUsers().subscribe({
               next:(resp) =>{
                 this.dataSource.data = resp;
@@ -74,7 +75,8 @@ export class UsersListComponent implements OnInit, AfterViewInit {
             Swal.fire({
               icon: 'error',
               title: '¡Upss!',
-              text: `${error.error.message}`
+              text: `${error.error.message}`,
+              confirmButtonColor: '#476E61'
             })
           }
         })

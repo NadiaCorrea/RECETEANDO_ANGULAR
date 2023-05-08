@@ -1,4 +1,3 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { UnitService } from '../../services/unit.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Unit } from '../../interfaces/unit.interface';
@@ -8,6 +7,7 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { UnitEditComponent } from '../unit-edit/unit-edit.component';
 import { filter } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -79,7 +79,8 @@ deleteUnit(id:number){
           Swal.fire({
             icon: 'error',
             title: '¡Upss!',
-            text: `${error.error.message}`
+            text: `${error.error.message}`,
+            confirmButtonColor: '#476E61'
           })
         }
       })
@@ -112,7 +113,8 @@ updateUnit(unit: Unit){
         Swal.fire({
           icon: 'error',
           title: '¡Upss!',
-          text: `${error.error.message}`
+          text: `${error.error.message}`,
+          confirmButtonColor: '#476E61'
         })
       }
     })

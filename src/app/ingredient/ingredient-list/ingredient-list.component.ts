@@ -1,4 +1,3 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from '../../interfaces/ingredient.interface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -8,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { IngredientEditComponent } from '../ingredient-edit/ingredient-edit.component';
 import { filter } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-ingredient-list',
@@ -78,7 +78,8 @@ export class IngredientListComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: '¡Upss!',
-              text: `${error.error.message}`
+              text: `${error.error.message}`,
+              confirmButtonColor: '#476E61'
             })
           }
         })
@@ -111,7 +112,8 @@ export class IngredientListComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: '¡Upss!',
-            text: `${error.error.message}`
+            text: `${error.error.message}`,
+            confirmButtonColor: '#476E61'
           })
         }
       })

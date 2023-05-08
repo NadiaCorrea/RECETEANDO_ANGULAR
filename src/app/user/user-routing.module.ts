@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { AdminGuardService } from '../services/admin-guard.service';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   {

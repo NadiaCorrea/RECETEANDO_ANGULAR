@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 
 // Lazy Loading  for main routes 

@@ -23,32 +23,32 @@
     
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre del ingrediente</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por nombre de ingrediente">Ingrediente</th>
           <td mat-cell *matCellDef="let row"> {{row.name}} </td>
         </ng-container>
     
         <!-- Description Column -->
         <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Ordenar por descripción">Descripción</th>
           <td mat-cell *matCellDef="let row"> {{row.description}} </td>
         </ng-container>
 
         <!-- Category name Column -->
         <ng-container matColumnDef="category">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre de la categoría </th>
+            <th mat-header-cell *matHeaderCellDef>Categoría</th>
             <td mat-cell *matCellDef="let row"> {{row.category.name}} </td>
           </ng-container>
     
         <!-- Update Column -->
         <ng-container matColumnDef="update">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actualizar </th>
+          <th mat-header-cell *matHeaderCellDef>Actualizar</th>
           <td mat-cell *matCellDef="let row"><button (click)="updateIngredient(row)" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square icons-btn"></i> Modificar</button>  </td>
         </ng-container>
   
         <!-- Action Column -->
         <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef> Eliminar </th>
-          <td mat-cell *matCellDef="let row"><button (click)="deleteIngredient(row.unitId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button>  </td>
+          <th mat-header-cell *matHeaderCellDef>Eliminar</th>
+          <td mat-cell *matCellDef="let row"><button (click)="deleteIngredient(row.ingredientId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button>  </td>
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
 import { Category } from '../../interfaces/category.interface';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-category-edit',
