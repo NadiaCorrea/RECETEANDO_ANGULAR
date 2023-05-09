@@ -1,0 +1,32 @@
+ <!--Title-->
+ <div class="row text-center">
+    <div class="col-12">
+      <h3>Editar Ingrediente</h3>
+    </div>
+  </div>
+ <!--Form-->
+  <div class="row ms-3">
+    <div mat-dialog-content>
+      <mat-form-field class="col-12">
+        <input matInput [(ngModel)]="info.name">
+      </mat-form-field>
+      <mat-form-field class="col-12">
+        <input matInput [(ngModel)]="info.description">
+      </mat-form-field>
+      <mat-form-field class="col-12">
+        <input type="text" matInput
+        [(ngModel)]="categoryName"
+               [matAutocomplete]="auto"  (ngModelChange)="onChange($event)">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let category of filteredCategories | async" [value]="category.name" (click) = "setCategory(category)">
+            {{category.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+  </div>
+<!--Buttons-->
+  <div mat-dialog-actions class="gap-5 justify-content-center">
+    <button class="btn btn-primary" [mat-dialog-close]="info" cdkFocusInitial>Guardar</button>
+    <button class="btn btn-danger"(click)="onNoClick()">Cancelar</button>
+  </div>

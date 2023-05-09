@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Recipe } from '../interfaces/recipe.interface';
-import { Injectable } from '@angular/core';
 import { Page } from '../interfaces/page.interface';
 import { environment } from 'src/environments/environment.prod';
+import { Injectable } from '@angular/core';
 
 
 @Injectable({
@@ -25,6 +25,14 @@ export class RecipeService{
 
     updateRecipe(formData:FormData, id:number):Observable<Recipe>{
         return this.http.put<Recipe>(`${this.url}/recipe/${id}`, formData)
+    }
+
+    addRecipe(formData:FormData):Observable<Recipe>{
+        return this.http.post<Recipe>(`${this.url}/recipe`, formData)
+    }
+
+    deleteRecipe(id:number):Observable<any>{
+        return this.http.delete<any>(`${this.url}/recipe/${id}`);
     }
 
 }

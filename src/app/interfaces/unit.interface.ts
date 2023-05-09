@@ -1,4 +1,6 @@
 export interface Unit {
-    key:string,
-    value: string
+    unitId?: number, 
+    name ?: string, 
+    abreviation ?: string,
+    fullname?: string
 }

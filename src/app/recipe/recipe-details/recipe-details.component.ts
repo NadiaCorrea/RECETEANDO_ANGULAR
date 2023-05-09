@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../../services/recipe.service';
-import { SearchService } from '../../services/search.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Recipe } from '../../interfaces/recipe.interface';
 import Swal from 'sweetalert2';
 import { IngredientService } from '../../services/ingredient.service';
 import { Ingredient } from '../../interfaces/ingredient.interface';
-import { Units } from '../../interfaces/units.enum';
-import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from '@angular/forms';
 import { RecipeIngredient } from '../../interfaces/recipeIngredient.interface';
 import { Step } from 'src/app/interfaces/step.interface';
 import { BackRecipe } from '../../interfaces/backRecipe.interface';
-import { User } from '../../interfaces/user.interface';
-import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { UnitService } from '../../services/unit.service';
+import { Unit } from '../../interfaces/unit.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-details',
@@ -23,7 +21,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class RecipeDetailsComponent implements OnInit {
 
   private id: number = 0;
-  units = Units;
+  listUnits: Unit [] = [];
   listIngredients:Ingredient [] = [];
   file : any = null;  
   fileName = '';
@@ -49,7 +47,7 @@ export class RecipeDetailsComponent implements OnInit {
   recipeFormGroup: FormGroup;
   canEdit :boolean = false;
 
-  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService,private searchService: SearchService, private authService:AuthenticationService, private route:ActivatedRoute, private fb:FormBuilder) {
+  constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService, private unitServ:UnitService, private authService:AuthenticationService, private route:ActivatedRoute, private fb:FormBuilder) {
 
     //estructura del formulario
     this.recipeFormGroup = this.fb.group({
@@ -64,15 +62,15 @@ export class RecipeDetailsComponent implements OnInit {
 
   // cuando se carga la página
   ngOnInit(): void {
-    this.searchService.hide();
-
-    //recupera el parametro de la URL id
+       //recupera el parametro de la URL id
     this.route.params.subscribe(params =>{
       this.id = params['id'];
       //método que llama al servicio que obteniene la receta
       this.getDetails(this.id);
       //llama al servicio que obtiene el listado de ingredientes existentes
       this.getIngredients();
+      //lama al servicio que obtiene el listado de unidades existentes
+      this.getUnits();
     })
   }
 
@@ -83,6 +81,7 @@ export class RecipeDetailsComponent implements OnInit {
       next:(resp) =>{
         //guarda respuesta en el objeto receta
         this.recipe = resp;
+        console.log(this.recipe)
         //verificando si el usuario es dueño de la receta o no
         this.canEdit = this.authService.isSameUser(this.recipe.user.userId)
         //asigna el valor del nombre de la receta 
@@ -106,7 +105,8 @@ export class RecipeDetailsComponent implements OnInit {
         Swal.fire({
           title: '¡Error!',
           text: 'Ha habido un fallo al obtener la receta.',
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
       }
     });      
@@ -124,6 +124,18 @@ export class RecipeDetailsComponent implements OnInit {
       })
     }
   
+    //Obtiene las unidades llamando al servicio para incluirlos en el desplegable listUnits
+    getUnits(){
+      this.unitServ.getUnits().subscribe({
+        next:(resp) =>{
+          this.listUnits = resp;
+        },
+        error:(error)=>{
+          console.log(error);
+        }
+      })
+    }
+
     //Method to get, create and delete the elements of the formArray of recipeIngredients
     get recipeIngredients(): FormArray{
       return this.recipeFormGroup.get('recipeIngredients') as FormArray;
@@ -140,7 +152,7 @@ export class RecipeDetailsComponent implements OnInit {
     getRecipeIngredient(recipeIngredient: RecipeIngredient):FormGroup{
       return this.fb.group({
         ingredientQuantity: [recipeIngredient.quantity, Validators.required],
-        ingredientUnit:new FormControl({value: recipeIngredient.unit, disabled: !this.canEdit}, Validators.required),
+        ingredientUnit:new FormControl({value: recipeIngredient.unit.unitId, disabled: !this.canEdit}, Validators.required),
         ingredientId: new FormControl({value: recipeIngredient.ingredientId.ingredientId, disabled: !this.canEdit}, Validators.required)
       })
     }
@@ -222,11 +234,11 @@ export class RecipeDetailsComponent implements OnInit {
         const recipeIngredient:RecipeIngredient = {
           ingredientId: {ingredientId: ingredient.ingredientId},
           quantity: ingredient.ingredientQuantity,
-          unit: ingredient.ingredientUnit
+          unit: {unitId: ingredient.ingredientUnit}
         }
         recipeIngredients.push(recipeIngredient);
       });
-
+      console.log(recipeIngredients)
       this.backRecipe.recipeIngredients = recipeIngredients;
     }
 
@@ -238,24 +250,26 @@ export class RecipeDetailsComponent implements OnInit {
       formData.append('recipe', userBlob);
       
       this.recipeService.updateRecipe(formData, this.id).subscribe({
-        next:(resp =>{
+        next:(resp) =>{
           Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Cambios guardados correctamente',
             showConfirmButton: true,
+            confirmButtonColor: '#476E61',
             timer: 3000
           });
           this.router.navigate(['/recipe']);
-        }),
-        error:(error =>{
+        },
+        error:(error) =>{
           console.log(error)
           Swal.fire({
             icon: 'error',
             title: '¡Ups!',
-            text: 'Ha habido un error al guardar los cambios.'
+            text: `${error.error.message}`,
+            confirmButtonColor: '#476E61'
           })
-        })
+        }
       });
 
     }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
-import { SearchService } from '../../services/search.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-verify',
@@ -10,11 +10,9 @@ import { SearchService } from '../../services/search.service';
 })
 export class VerifyComponent implements OnInit {
 
-  constructor(private router:Router, private userService: UserService, private route:ActivatedRoute, private showingElements:SearchService) { }
+  constructor(private router:Router, private userService: UserService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-
-    this.showingElements.hide();
 
     const code = this.route.snapshot.queryParams['code'];
     
@@ -26,6 +24,7 @@ export class VerifyComponent implements OnInit {
           icon: 'success',
           title: 'Muchas gracias por verificar tu cuenta. Ya puede acceder a Receteando.',
           showConfirmButton: true,
+          confirmButtonColor: '#476E61',
           timer: 3500
         });
         this.router.navigate(['/auth/login']);
@@ -34,7 +33,8 @@ export class VerifyComponent implements OnInit {
         Swal.fire({
           title: 'Error!',
           text: `${error.error.message}`,
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
         this.router.navigate(['/']);
       }

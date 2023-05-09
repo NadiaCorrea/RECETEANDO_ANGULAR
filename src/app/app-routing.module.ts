@@ -1,9 +1,8 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 
 
 // Lazy Loading  for main routes 
@@ -25,6 +24,21 @@ const routes: Routes = [
     path:'user', 
     canActivateChild:[AuthGuardService],
     loadChildren:() => import('./user/user.module').then(m => m.UserModule)
+  },
+  {
+    path:'unit', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./unit/unit.module').then(m => m.UnitModule)
+  },
+  {
+    path:'category', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./category/category.module').then(m => m.CategoryModule)
+  },
+  {
+    path:'ingredient', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./ingredient/ingredient.module').then(m => m.IngredientModule)
   },
   {
     path:'**', 

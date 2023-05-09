@@ -24,13 +24,23 @@
                             <i class="bi bi-people"></i></a>
                         <p>Usuarios</p>
                         </li>
+<!--Unidades-->
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/unit/list']">
+                            <i class="bi bi-file-spreadsheet"></i></a>
+                        <p>Unidades</p>
+                        </li>
+<!--Categorías-->
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/category/list']">
+                            <i class="bi bi-tags"></i></a>
+                        <p>Categorías</p>
+                        </li>
+<!--Ingredientes-->
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/ingredient/list']">
+                            <i class="bi bi-card-list"></i></a>
+                        <p>Ingredientes</p>
+                        </li>                       
                     </ul>
-<!--Buscador-->
-                    <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search" *ngIf="searchService.showingStatus()">
-                        <input class="form-control me-2" type="search" [(ngModel)]="keyword"
-                        name="keyword"   placeholder="Búsqueda" aria-label="Search" size="50">
-                        <button class="btn btn-primary" type="submit">Buscar</button>
-                    </form>
+
 <!--Configuración-->
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
                         <li class="nav-item dropdown text-center">

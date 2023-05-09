@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <!--Title-->
+        <div class="row text-center mb-5">
+            <div class="col-12">
+                <h1 >Añadir categoría</h1>
+            </div>
+        </div>
+    <!--Form-->
+        <div class="row justify-content-center">
+            <form (ngSubmit)="addCategory()" #myForm ="ngForm" autocomplete="off" action="#">
+                <div class="col">
+                    <label for="name"><h4>*Nombre de la categoría:</h4></label>
+                    <input  class="form-control" name="name" type="text" maxlength="100" [(ngModel)] ="category.name" required>
+                    <div class="link-danger mb-3">
+                        <span class="form-text text-danger" *ngIf="notValidField('name')">El nombre de la categoría es obligatorio*</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="description"><h4>*Descripción de la categoría:</h4></label>
+                    <input  class="form-control" name="description" type="text" maxlength="200" [(ngModel)] ="category.description" required>
+                    <div class="link-danger mb-3">
+                        <span class="form-text text-danger" *ngIf="notValidField('description')">La descripción de la categoría es obligatoria*</span>
+                    </div>
+                </div>
+    <!--Buttons-->
+                <div class="row mb-5 text-center" >
+                    <div class="col-6">
+                        <button class="btn btn-primary" type="submit" [disabled]="myForm.invalid">Guardar</button>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-primary" [routerLink]="['/category/list']">Cancelar</a>
+                    </div> 
+                </div>
+            </form>
+        </div>
+    </div>

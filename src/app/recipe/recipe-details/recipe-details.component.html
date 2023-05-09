@@ -21,7 +21,7 @@
                 <label for="recipeName"><h3>*Nombre de la receta:</h3></label>
                 <input  class="form-control" formControlName="recipeName" name="name" type="text" maxlength="100" [readOnly]="!canEdit">
                 <div class="link-danger mb-3">
-                    <span *ngIf="recipeFormGroup.controls['recipeName'].errors?.['required']">*El nombre de la receta es obligatorio y no debe tenber más de 100 caracteres.</span>
+                    <span *ngIf="recipeFormGroup.controls['recipeName'].errors?.['required']">*El nombre de la receta es obligatorio y no debe tener más de 100 caracteres.</span>
                 </div>
                 
 
@@ -62,8 +62,8 @@
                             </div>
                         </td>
                         <td>
-                            <select formControlName="ingredientUnit" class="form-control" name="unit" required>
-                                <option *ngFor="let unit of units| keyvalue" [value]="unit.key">{{unit.value}}</option>
+                            <select formControlName="ingredientUnit" class="form-control" required>
+                                <option *ngFor="let unit of listUnits" [value]="unit.unitId">{{unit.abreviation}}</option>
                             </select>
                             <div class="link-danger mb-3">
                                 <span *ngIf="!isValidUnit(i)">*La unidad del ingrediente es obligatoria.</span>
@@ -112,7 +112,7 @@
             </div>
         </div>
 <!--Submit and cancel buttons-->
-        <div class="row mt-5 text-center" >
+        <div class="row mt-5 mb-5 text-center d-flex justify-content-around" >
             <div class="col-6" *ngIf="canEdit">
                 <button class="btn btn-primary" type="submit" [disabled]="recipeFormGroup.invalid">Guardar</button>
             </div>

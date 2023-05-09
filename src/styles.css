@@ -97,7 +97,7 @@ table {
 }
 
 td, th {
-  width: 25%;
+  width: 20%;
   text-align: center;
   }
 
@@ -153,3 +153,41 @@ th.mat-header-cell {
 .mat-sort-header-container{
     justify-content: center;
 }
+
+.inputCenter{
+  justify-self: center;
+}
+
+.mat-dialog-container{
+  background: #fff;
+  color: var(--black);
+}
+
+.p-component, .p-component * {
+  box-sizing: border-box;
+  width: 100%;
+}
+.p-inputtext{
+  padding: 0.375rem 0.75rem !important;
+}
+
+.p-inputtext:enable:focus{
+  color: var(--bs-body-color);
+  background-color: var(--bs-form-control-bg);
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+/* p-element ng-tns-c69-0 p-autocomplete-input p-inputtext p-component ng-star-inserted 
+
+.p-inputtext:enable:focus
+.form-control:focus {
+    color: var(--bs-body-color);
+    background-color: var(--bs-form-control-bg);
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+}
+
+*/

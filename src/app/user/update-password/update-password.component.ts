@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { NgForm } from '@angular/forms';
 import { ChangePassword } from '../../interfaces/changePassword.interface';
 import Swal from 'sweetalert2';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SearchService } from '../../services/search.service';
+
 
 @Component({
   selector: 'app-update-password',
@@ -17,10 +17,9 @@ export class UpdatePasswordComponent implements OnInit {
 
   @ViewChild('myForm') myForm !: NgForm;
 
-  constructor(private userServ: UserService, private router:Router, private searchService: SearchService) { }
+  constructor(private userServ: UserService, private router:Router) { }
 
   ngOnInit(): void {
-    this.searchService.hide();
   }
 
   notValidField(field:string):boolean {
@@ -43,6 +42,7 @@ export class UpdatePasswordComponent implements OnInit {
           icon: 'success',
           title: 'Su contraseña ha sido modificada.',
           showConfirmButton: true,
+          confirmButtonColor: '#476E61',
           timer: 3500
         });
         this.router.navigateByUrl('/recipe');
@@ -51,7 +51,8 @@ export class UpdatePasswordComponent implements OnInit {
         Swal.fire({
           title: 'Error!',
           text: `${error.error.message}`,
-          icon: 'error'
+          icon: 'error',
+          confirmButtonColor: '#476E61'
         });
       }
       });

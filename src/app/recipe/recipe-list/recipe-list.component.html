@@ -1,10 +1,19 @@
 <div class="container-fluid">
   <div class="row mt-5 mb-5 text-center">
-    <div class="col-md-4 offset-md-4">
-      <h1>Listado de recetas</h1>
+    <h1>Listado de recetas</h1>
+  </div>
+
+  <div class="row m-3">
+
+    <div class="col-8">
+      <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search">
+        <input class="form-control me-2" type="search" [(ngModel)]="keyword"
+        name="keyword"   placeholder="Búsqueda" aria-label="Search" size="50">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+    </form>
     </div>
-    <div class="col-md-4" hidden>
-      <button class="btn btn-primary btn-lg"><i class="bi bi-file-plus"></i> Añadir receta</button>
+    <div class="col-2 offset-2">
+      <button class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus"></i> Añadir receta</button>
     </div>
   </div>
 
@@ -21,8 +30,11 @@
               <img  *ngIf="recipe.photo === null" src="https://res.cloudinary.com/dhqubydyc/image/upload/v1677067465/notPhoto_f2r3fn.jpg" class="card-img-top" [alt]="recipe.name">
               <div class="card-body">
                 <h5 class="card-title">{{recipe.name}}</h5>
-                <p class="card-text">{{recipe.description}}</p>
-                <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye"></i> Ver detalles</a>
+                <div class="d-flex justify-content-around">
+                  <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye icons-btn"></i> Ver detalles</a>
+                  <button *ngIf="canEditRecipe(recipe) || isAdmin()"  (click)="deleteRecipe(recipe.recipeId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
+                </div>
+                
               </div>
             </div>
           </div>

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SearchService } from '../../services/search.service';
+
 
 @Component({
   selector: 'app-register',
@@ -20,10 +20,10 @@ export class RegisterComponent implements OnInit {
     name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     }, {Validators:[this.passwordValidator()]});
 
-  constructor(private fb:FormBuilder, private userService: UserService, private router:Router, private showingElements:SearchService) { }
+  constructor(private fb:FormBuilder, private userService: UserService, private router:Router) { }
 
   ngOnInit(): void {
-    this.showingElements.hide();
+
    }
 
   notValidField(campo:string){
@@ -63,22 +63,22 @@ export class RegisterComponent implements OnInit {
 
   this.userService.addUser(newUser).subscribe({
     next:(resp) =>{
-      console.log(resp);
       Swal.fire({
         position: 'center',
         icon: 'success',
         title: 'Tu cuenta ha sido creada. Por favor, revisa tu correo para verificar tu cuenta',
         showConfirmButton: true,
+        confirmButtonColor: '#476E61',
         timer: 3500
       });
       this.router.navigate(['/']);
     },
     error:(error) =>{
-      console.log(error.error.message);
       Swal.fire({
-        title: 'Error!',
+        title: 'Ha acurrido un error',
         text: `${error.error.message}`,
-        icon: 'error'
+        icon: 'error',
+        confirmButtonColor: '#476E61'
       });
     }
 
