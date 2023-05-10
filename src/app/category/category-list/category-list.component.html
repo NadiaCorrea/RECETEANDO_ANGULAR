@@ -6,7 +6,7 @@
     </div>
   
   <div class="row justify-content-between mb-5">
-    <div class="col-9">
+    <div class="col-6 col-md-12">
       <mat-form-field class="mat-form-field-should-float mat-focused filter">
         <mat-label>Buscar categoría:</mat-label>
         <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: busca" #input>
@@ -41,7 +41,7 @@
   
         <!-- Action Column -->
         <ng-container matColumnDef="delete">
-          <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
           <td mat-cell *matCellDef="let row"><button (click)="deleteCategory(row.categoryId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button>  </td>
         </ng-container>
     

@@ -89,7 +89,7 @@ export class IngredientListComponent implements OnInit {
 
   updateIngredient(ingredient: Ingredient){
     const dialogRef = this.dialog.open(IngredientEditComponent, {
-      width: '600px',
+      width: '500px',
       data: ingredient
     });
   
