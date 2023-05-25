@@ -41,6 +41,11 @@ const routes: Routes = [
     loadChildren:() => import('./ingredient/ingredient.module').then(m => m.IngredientModule)
   },
   {
+    path:'favorite', 
+    canActivateChild:[AuthGuardService],
+    loadChildren:() => import('./favorite/favorite.module').then(m => m.FavoriteModule)
+  },
+  {
     path:'**', 
     component:NotFoundComponent
   }

@@ -183,6 +183,30 @@ th.mat-header-cell {
   box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
 }
 
+.photo{
+  height: 100%;
+  width: 100%;
+}
+
+.bi-heart-fill{
+  color: var(--mustard);
+}
+
+.bi-heart-fill:hover {
+  color: var(--darkerGreen);
+  --webkit-animation: pulse 1.5s infinite;
+}
+
+.heartColor{
+  color:  #E26D5C;
+}
+
+.heartColor:hover {
+  color: var(--mustard);
+  --webkit-animation: pulse 1.5s infinite;
+}
+
+
 @media only screen and (max-width: 600px)  {
 
   *{
@@ -212,4 +236,7 @@ th.mat-header-cell {
   }
 
 
+  .photo{
+    height: 200px;
+  }
 }
