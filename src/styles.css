@@ -178,9 +178,9 @@ th.mat-header-cell {
 .p-inputtext:enable:focus{
   color: var(--bs-body-color);
   background-color: var(--bs-form-control-bg);
-  border-color: #86b7fe;
+  border-color: var(--mustard);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+  box-shadow: 0 0 0 0.25rem var(--mustard) !important;
 }
 
 .photo{
@@ -206,6 +206,30 @@ th.mat-header-cell {
   --webkit-animation: pulse 1.5s infinite;
 }
 
+.p-multiselect{
+  border-color: var(--darkerGreen) !important;
+}
+
+.p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext{
+  border-color: var(--darkerGreen) !important;
+}
+
+.p-multiselect:not(.p-disabled):hover{
+  border-color: var(--mustard) !important;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight{
+  color: var(--darkerGreen) !important;
+  background: var(--yellow) !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--darkerGreen)!important;
+  background: var(--darkerGreen) !important;
+}
+.p-disabled, .p-component:disabled{
+  opacity: unset !important;
+}
 
 @media only screen and (max-width: 600px)  {
 
