@@ -163,6 +163,10 @@ th.mat-header-cell {
   color: var(--black);
 }
 
+.modals{
+  overflow-x: hidden;
+}
+
 .p-component, .p-component * {
   box-sizing: border-box;
   width: 100%;
@@ -174,20 +178,89 @@ th.mat-header-cell {
 .p-inputtext:enable:focus{
   color: var(--bs-body-color);
   background-color: var(--bs-form-control-bg);
-  border-color: #86b7fe;
+  border-color: var(--mustard);
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+  box-shadow: 0 0 0 0.25rem var(--mustard) !important;
 }
 
-/* p-element ng-tns-c69-0 p-autocomplete-input p-inputtext p-component ng-star-inserted 
-
-.p-inputtext:enable:focus
-.form-control:focus {
-    color: var(--bs-body-color);
-    background-color: var(--bs-form-control-bg);
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+.photo{
+  height: 100%;
+  width: 100%;
 }
 
-*/
+.bi-heart-fill{
+  color: var(--mustard);
+}
+
+.bi-heart-fill:hover {
+  color: var(--darkerGreen);
+  --webkit-animation: pulse 1.5s infinite;
+}
+
+.heartColor{
+  color:  #E26D5C;
+}
+
+.heartColor:hover {
+  color: var(--mustard);
+  --webkit-animation: pulse 1.5s infinite;
+}
+
+.p-multiselect{
+  border-color: var(--darkerGreen) !important;
+}
+
+.p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext{
+  border-color: var(--darkerGreen) !important;
+}
+
+.p-multiselect:not(.p-disabled):hover{
+  border-color: var(--mustard) !important;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight{
+  color: var(--darkerGreen) !important;
+  background: var(--yellow) !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--darkerGreen)!important;
+  background: var(--darkerGreen) !important;
+}
+.p-disabled, .p-component:disabled{
+  opacity: unset !important;
+}
+
+@media only screen and (max-width: 600px)  {
+
+  *{
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  table {
+    max-width: 100%;
+    font-size: 4px;
+  }
+
+  td, th {
+    width: 10%;
+  }
+
+  th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+      padding-left: 5px!important;
+  }
+
+  th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 5px!important;
+  }
+
+  .icons-btn{
+    font-size: xx-small;
+  }
+
+
+  .photo{
+    height: 200px;
+  }
+}

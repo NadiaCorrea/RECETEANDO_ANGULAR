@@ -19,6 +19,7 @@ import { IngredientModule } from './ingredient/ingredient.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FavoriteModule } from './favorite/favorite.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     UnitModule,
     CategoryModule,
-    IngredientModule
+    IngredientModule,
+    FavoriteModule
   ],
   providers: [ 
     AuthGuardService,

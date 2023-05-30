@@ -11,4 +11,5 @@ export interface Recipe{
     creationDate: Date;
     steps:Step[];
     recipeIngredients:RecipeIngredient[];
+    favorite?:boolean;
 }

@@ -1,20 +1,23 @@
  <!--Title-->
  <div class="row text-center">
     <div class="col-12">
-      <h3>Editar Ingrediente</h3>
+      <h2>Editar Ingrediente</h2>
     </div>
   </div>
  <!--Form-->
-  <div class="row ms-3">
-    <div mat-dialog-content>
+  <div class="row ms-5">
+    <div mat-dialog-content style="overflow-x: hidden;">
       <mat-form-field class="col-12">
-        <input matInput [(ngModel)]="info.name">
+        <label for="name" class="mb-2"><strong>Ingrediente:</strong></label>
+        <input matInput class="ms-5" [(ngModel)]="info.name" name="name">
       </mat-form-field>
       <mat-form-field class="col-12">
-        <input matInput [(ngModel)]="info.description">
+        <label for="name" class="mb-2"><strong>Descripción:</strong></label>
+        <input matInput class="ms-5" [(ngModel)]="info.description" name="description">
       </mat-form-field>
       <mat-form-field class="col-12">
-        <input type="text" matInput
+        <label for="name" class="mb-2"><strong>Categoría:</strong></label>
+        <input type="text" matInput class="ms-5"
         [(ngModel)]="categoryName"
                [matAutocomplete]="auto"  (ngModelChange)="onChange($event)">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">

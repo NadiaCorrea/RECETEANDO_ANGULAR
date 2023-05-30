@@ -6,11 +6,14 @@
   <div class="row m-3">
 
     <div class="col-8">
-      <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search">
-        <input class="form-control me-2" type="search" [(ngModel)]="keyword"
-        name="keyword"   placeholder="Búsqueda" aria-label="Search" size="50">
-        <button class="btn btn-primary" type="submit">Buscar</button>
-    </form>
+      <div class="row">
+        <div class="col-11">
+          <p-multiSelect [options]="ingredients" [(ngModel)]="selectedIngredients" optionLabel="name" placeholder="Buscar recetas por ingredientes"></p-multiSelect>
+        </div>
+        <div class="col-1">
+          <button  class="btn btn-primary" (click)="search()">Buscar</button>
+        </div>
+      </div>      
     </div>
     <div class="col-2 offset-2">
       <button class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus"></i> Añadir receta</button>
@@ -33,6 +36,7 @@
                 <div class="d-flex justify-content-around">
                   <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye icons-btn"></i> Ver detalles</a>
                   <button *ngIf="canEditRecipe(recipe) || isAdmin()"  (click)="deleteRecipe(recipe.recipeId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
+                  <a (click)="changeFavorite(recipe)"><i class="bi bi-heart-fill" [ngClass]="{'heartColor': recipe.favorite}"></i></a>
                 </div>
                 
               </div>

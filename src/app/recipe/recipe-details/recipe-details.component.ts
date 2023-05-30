@@ -12,6 +12,7 @@ import { Unit } from '../../interfaces/unit.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-details',
@@ -22,7 +23,9 @@ export class RecipeDetailsComponent implements OnInit {
 
   private id: number = 0;
   listUnits: Unit [] = [];
+  filteredUnits:Unit[] = [];
   listIngredients:Ingredient [] = [];
+  filteredIngredients:Ingredient[] = [];
   file : any = null;  
   fileName = '';
 
@@ -47,7 +50,10 @@ export class RecipeDetailsComponent implements OnInit {
   recipeFormGroup: FormGroup;
   canEdit :boolean = false;
 
+
   constructor(private router: Router, private recipeService: RecipeService, private ingredientService: IngredientService, private unitServ:UnitService, private authService:AuthenticationService, private route:ActivatedRoute, private fb:FormBuilder) {
+
+   
 
     //estructura del formulario
     this.recipeFormGroup = this.fb.group({
@@ -62,7 +68,7 @@ export class RecipeDetailsComponent implements OnInit {
 
   // cuando se carga la página
   ngOnInit(): void {
-       //recupera el parametro de la URL id
+    //recupera el parametro de la URL id
     this.route.params.subscribe(params =>{
       this.id = params['id'];
       //método que llama al servicio que obteniene la receta
@@ -100,6 +106,7 @@ export class RecipeDetailsComponent implements OnInit {
           const fg = this.getStep(step);
           this.steps.push(fg);
         });
+        console.log(this.recipeFormGroup);
       },
       error:(error) =>{
         Swal.fire({
@@ -124,17 +131,20 @@ export class RecipeDetailsComponent implements OnInit {
       })
     }
   
-    //Obtiene las unidades llamando al servicio para incluirlos en el desplegable listUnits
-    getUnits(){
-      this.unitServ.getUnits().subscribe({
-        next:(resp) =>{
-          this.listUnits = resp;
-        },
-        error:(error)=>{
-          console.log(error);
-        }
-      })
-    }
+  //getting existing units
+  getUnits(){
+    this.unitServ.getUnits().pipe(map((units: Unit[]) => {
+      return units.map(unit => {
+        return {...unit, fullname: `${unit.name} (${unit.abreviation})`};
+      });
+    })).subscribe({
+      next:(resp)=>{
+        this.listUnits = resp;
+      }
+    })
+  }
+
+
 
     //Method to get, create and delete the elements of the formArray of recipeIngredients
     get recipeIngredients(): FormArray{
@@ -152,8 +162,8 @@ export class RecipeDetailsComponent implements OnInit {
     getRecipeIngredient(recipeIngredient: RecipeIngredient):FormGroup{
       return this.fb.group({
         ingredientQuantity: [recipeIngredient.quantity, Validators.required],
-        ingredientUnit:new FormControl({value: recipeIngredient.unit.unitId, disabled: !this.canEdit}, Validators.required),
-        ingredientId: new FormControl({value: recipeIngredient.ingredientId.ingredientId, disabled: !this.canEdit}, Validators.required)
+        ingredientUnit:new FormControl({value: {...recipeIngredient.unit, fullname: `${recipeIngredient.unit.name} (${recipeIngredient.unit.abreviation})`}, disabled: !this.canEdit}, Validators.required),
+        ingredientId: new FormControl({value: recipeIngredient.ingredientId, disabled: !this.canEdit}, Validators.required)
       })
     }
 
@@ -200,8 +210,16 @@ export class RecipeDetailsComponent implements OnInit {
       return !(this.recipeFormGroup.controls['recipeIngredients'] as FormArray).controls[index].get('ingredientUnit')?.errors;
     }
 
+    isUnitIncluded(index: number){
+      return !(this.recipeFormGroup.controls['recipeIngredients'] as FormArray).controls[index].get('ingredientUnit')?.touched || this.listUnits.includes((this.recipeFormGroup.controls['recipeIngredients'] as FormArray).controls[index].get('ingredientUnit')?.value);
+    }
+
     isValidIngredientId(index: number) {
       return !(this.recipeFormGroup.controls['recipeIngredients'] as FormArray).controls[index].get('ingredientId')?.errors;
+    }
+
+    isIngredientIncluded(index: number){
+      return !(this.recipeFormGroup.controls['recipeIngredients'] as FormArray).controls[index].get('ingredientId')?.touched || this.listIngredients.includes((this.recipeFormGroup.controls['recipeIngredients'] as FormArray).controls[index].get('ingredientId')?.value);
     }
 
     //Steps Validators 
@@ -232,9 +250,9 @@ export class RecipeDetailsComponent implements OnInit {
       const ingredientsList:[] = this.recipeFormGroup.value.recipeIngredients;
       ingredientsList.forEach((ingredient:any) => {
         const recipeIngredient:RecipeIngredient = {
-          ingredientId: {ingredientId: ingredient.ingredientId},
+          ingredientId: ingredient.ingredientId,
           quantity: ingredient.ingredientQuantity,
-          unit: {unitId: ingredient.ingredientUnit}
+          unit: ingredient.ingredientUnit
         }
         recipeIngredients.push(recipeIngredient);
       });
@@ -243,6 +261,7 @@ export class RecipeDetailsComponent implements OnInit {
     }
 
     onSubmit(){
+      console.log( "envia " + this.recipeFormGroup.value)
       const formData = new FormData();
       formData.append('file', this.file);
       this.formGroupToBackRecipe();
@@ -274,8 +293,36 @@ export class RecipeDetailsComponent implements OnInit {
 
     }
 
+  //Method that filters units that include the input text
+  filterUnit(event:any){
+    let filtered: Unit[] = [];
+    let query = event.query;
 
+    for(let i = 0; i < this.listUnits.length; i ++){
+      let unit = this.listUnits[i];
+      if(unit.fullname?.toLowerCase().includes(query.toLowerCase())){
+        filtered.push(unit);
+      }
+    }
+
+    this.filteredUnits = filtered;
+  }
+
+   //Method that filters ingredients that include the input text
+   filterIngredient(event:any){
+    let filtered:Ingredient[] = [];
+    let query = event.query;
+
+    for(let i = 0; i < this.listIngredients.length; i ++){
+      let ingredient = this.listIngredients[i];
+      if(ingredient.name?.toLowerCase().includes(query.toLowerCase())){
+        filtered.push(ingredient);
+      }
+    }
+    this.filteredIngredients = filtered;
+  }
     
-  
+ 
+
   }
   

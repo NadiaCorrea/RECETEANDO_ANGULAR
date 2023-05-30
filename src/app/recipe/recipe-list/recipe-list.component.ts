@@ -6,6 +6,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
+import { FavoriteService } from 'src/app/services/favorite.service';
+import { NewFavorite } from '../../interfaces/favorite.interface';
+import { IngredientFilter } from '../../interfaces/ingredientFilter';
+import { Ingredient } from '../../interfaces/ingredient.interface';
+import { IngredientService } from '../../services/ingredient.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,9 +19,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 export class RecipeListComponent implements OnInit {
 
-  keyword :string = '';
-
-  @ViewChild('myForm') myForm !: NgForm;
+  ingredients:Ingredient[] = [];
+  selectedIngredients:Ingredient[] = [];
 
   recipes: Page<Recipe> = {
     content: [],
@@ -29,10 +33,22 @@ export class RecipeListComponent implements OnInit {
     numberOfElements:0
   };
 
-  constructor(private recipeService:RecipeService, private router:Router, private authService:AuthenticationService) { }
+  constructor(private recipeService:RecipeService, private router:Router, private authService:AuthenticationService, private favoriteServ:FavoriteService, private ingredientServ:IngredientService) { }
 
   ngOnInit(): void {
+    this.getIngredients();
     this.getRecipePage();
+  }
+
+  getIngredients(){
+    this.ingredientServ.getListIngredients().subscribe({
+      next:(resp) =>{
+        this.ingredients = resp;
+      },
+      error:(error)=>{
+        console.log("no hay ingredientes");
+      }
+    })
   }
 
   search(){
@@ -40,7 +56,9 @@ export class RecipeListComponent implements OnInit {
   }
 
   getRecipePage(pageNumber:number = 1, sizeNumber:number = 6, sortField:string = "name"){
-    this.recipeService.getRecipes(pageNumber, sizeNumber, sortField, this.keyword).subscribe({
+    const ingredients:any[] = this.selectedIngredients.map(ing => ing.ingredientId);
+    const ingFilter:IngredientFilter = {ingredientsIds: ingredients};
+    this.recipeService.getRecipesByingredients(pageNumber, sizeNumber, sortField,ingFilter).subscribe({
       next:(resp) =>{
         this.recipes = resp;
       },
@@ -54,6 +72,9 @@ export class RecipeListComponent implements OnInit {
       }
     })
   }
+
+ 
+
 
   canEditRecipe(recipe :Recipe){
     //verificando si el usuario es dueño de la receta o no
@@ -96,6 +117,40 @@ export class RecipeListComponent implements OnInit {
       })
     }
   })
+}
+
+changeFavorite(recipe:Recipe){
+
+  const isFavorite = recipe.favorite;
+  const recipeId:any = recipe.recipeId;
+  
+  if(isFavorite){
+    this.favoriteServ.deleteFavoriteRecipeId(recipeId).subscribe({
+      next:(resp)=>{
+        this.updateRecipe(recipeId, false);
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+    })
+  } else{
+    const recipeToAdd: NewFavorite = {recipeId:recipeId}
+    this.favoriteServ.addFavorite(recipeToAdd).subscribe({
+      next:(resp) =>{
+        this.updateRecipe(recipeId, true);
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+    })
+  }
+}
+
+private updateRecipe(recipeId: number, value: boolean) {
+  const existingRecipe = this.recipes.content.find(rec => rec.recipeId === recipeId);
+  if (existingRecipe) {
+    existingRecipe.favorite = value;
+  }
 }
 
   

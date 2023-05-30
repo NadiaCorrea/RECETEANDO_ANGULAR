@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { NgModule } from '@angular/core';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgModule } from '@angular/core';
     SharedModule, 
     ReactiveFormsModule,
     RecipeRoutingModule, 
-    AutoCompleteModule
+    AutoCompleteModule,
+    MultiSelectModule
   ]
 })
 
