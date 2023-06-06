@@ -8,21 +8,21 @@
     <!--Form-->
         <div class="row justify-content-center">
             <form (ngSubmit)="addIngredient()" #myForm ="ngForm" autocomplete="off" action="#">
-                <div class="col">
+                <div class="col-8 offset-2">
                     <label for="name"><h4>*Nombre del ingrediente:</h4></label>
                     <input  class="form-control" name="name" type="text" maxlength="100" [(ngModel)] ="ingredient.name" required>
                     <div class="link-danger mb-3">
                         <span class="form-text text-danger" *ngIf="notValidField('name')">El nombre del ingrediente es obligatorio*</span>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-8 offset-2">
                     <label for="description"><h4>*Descripción:</h4></label>
                     <input  class="form-control" name="description" type="text" maxlength="200" [(ngModel)] ="ingredient.description" required>
                     <div class="link-danger mb-3">
                         <span class="form-text text-danger" *ngIf="notValidField('description')">La descripción es obligatoria*</span>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-8 offset-2">
                     <label for="category.categoryId"><h4>*Categoría:</h4></label>
                     <select class="form-control" type="number" [(ngModel)] ="category.categoryId"  name="category.categoryId" required>
                         <option *ngFor="let category of categories" [value] ="category.categoryId">{{category.name}}</option>

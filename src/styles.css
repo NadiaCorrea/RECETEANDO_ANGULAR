@@ -231,6 +231,11 @@ th.mat-header-cell {
   opacity: unset !important;
 }
 
+.rating span.ng-star-inserted{
+  font-size: 30px;
+  color: var(--mustard);
+}
+
 @media only screen and (max-width: 600px)  {
 
   *{

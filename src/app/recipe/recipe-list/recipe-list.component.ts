@@ -2,15 +2,17 @@ import { RecipeService } from '../../services/recipe.service';
 import { Page } from '../../interfaces/page.interface';
 import { Recipe } from '../../interfaces/recipe.interface';
 import Swal from 'sweetalert2';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { NewFavorite } from '../../interfaces/favorite.interface';
-import { IngredientFilter } from '../../interfaces/ingredientFilter';
 import { Ingredient } from '../../interfaces/ingredient.interface';
 import { IngredientService } from '../../services/ingredient.service';
+import { IngredientFilter } from '../../interfaces/ingredientFilter';
+import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddRating, Rating } from 'src/app/interfaces/rating.interface';
+import { RatingService } from 'src/app/services/rating.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -21,6 +23,11 @@ export class RecipeListComponent implements OnInit {
 
   ingredients:Ingredient[] = [];
   selectedIngredients:Ingredient[] = [];
+  newRating:number = 0;
+  selectedStars:number = 0;
+  hoveredStars:number = 0;
+  rating: Rating = {points: 0, recipe: {recipeId: 0, name: ''}};
+  readonly = false;
 
   recipes: Page<Recipe> = {
     content: [],
@@ -33,11 +40,13 @@ export class RecipeListComponent implements OnInit {
     numberOfElements:0
   };
 
-  constructor(private recipeService:RecipeService, private router:Router, private authService:AuthenticationService, private favoriteServ:FavoriteService, private ingredientServ:IngredientService) { }
+  constructor(private recipeService:RecipeService, private router:Router, private authService:AuthenticationService, private favoriteServ:FavoriteService, private ingredientServ:IngredientService, private config:NgbRatingConfig, private ratingServ:RatingService) { }
 
   ngOnInit(): void {
     this.getIngredients();
     this.getRecipePage();
+    this.config.max = 5;
+    this.config.readonly = true;
   }
 
   getIngredients(){
@@ -61,6 +70,7 @@ export class RecipeListComponent implements OnInit {
     this.recipeService.getRecipesByingredients(pageNumber, sizeNumber, sortField,ingFilter).subscribe({
       next:(resp) =>{
         this.recipes = resp;
+
       },
       error:(error) =>{
         Swal.fire({
@@ -72,9 +82,6 @@ export class RecipeListComponent implements OnInit {
       }
     })
   }
-
- 
-
 
   canEditRecipe(recipe :Recipe){
     //verificando si el usuario es dueño de la receta o no
@@ -153,6 +160,42 @@ private updateRecipe(recipeId: number, value: boolean) {
   }
 }
 
-  
+votingModal(id:any){
+  this.selectedStars = 0;
+  this.ratingServ.getRating(id).subscribe({
+    next:(resp) =>{
+      this.rating = resp;
+      this.selectedStars = this.rating.points;
+    }, 
+    error:(error) =>{
+      console.log(error);
+    }
+  })
+}
+
+voteRecipe(){
+  const newRating: Rating = {
+    points: this.selectedStars,
+    recipe: {
+      recipeId: this.rating.recipe.recipeId,
+      name: this.rating.recipe.name
+    }
+  };
+
+  this.ratingServ.addRating(newRating).subscribe({
+    next:(resp) =>{
+      this.getRecipePage();
+    },
+    error:(error) =>{
+      console.log(error)
+    }
+  });
+
+
+ 
+}
+
+
+
 
 }

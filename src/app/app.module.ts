@@ -20,6 +20,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FavoriteModule } from './favorite/favorite.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FavoriteModule } from './favorite/favorite.module';
     UnitModule,
     CategoryModule,
     IngredientModule,
-    FavoriteModule
+    FavoriteModule,
+    NgbModule
   ],
   providers: [ 
     AuthGuardService,

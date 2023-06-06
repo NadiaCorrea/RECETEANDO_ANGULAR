@@ -12,4 +12,5 @@ export interface Recipe{
     steps:Step[];
     recipeIngredients:RecipeIngredient[];
     favorite?:boolean;
+    averageRating?:number;
 }
