@@ -2,7 +2,7 @@ import { RecipeService } from '../../services/recipe.service';
 import { Page } from '../../interfaces/page.interface';
 import { Recipe } from '../../interfaces/recipe.interface';
 import Swal from 'sweetalert2';
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
@@ -10,9 +10,10 @@ import { NewFavorite } from '../../interfaces/favorite.interface';
 import { Ingredient } from '../../interfaces/ingredient.interface';
 import { IngredientService } from '../../services/ingredient.service';
 import { IngredientFilter } from '../../interfaces/ingredientFilter';
-import { NgbRatingConfig, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { AddRating, Rating } from 'src/app/interfaces/rating.interface';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Rating } from 'src/app/interfaces/rating.interface';
 import { RatingService } from 'src/app/services/rating.service';
+import { PaginatorComponent } from '../../shared/paginator/paginator.component';
 
 @Component({
   selector: 'app-recipe-list',
@@ -28,6 +29,8 @@ export class RecipeListComponent implements OnInit {
   hoveredStars:number = 0;
   rating: Rating = {points: 0, recipe: {recipeId: 0, name: ''}};
   readonly = false;
+
+  @ViewChild("paginator") paginator !: PaginatorComponent;
 
   recipes: Page<Recipe> = {
     content: [],
@@ -45,7 +48,9 @@ export class RecipeListComponent implements OnInit {
   ngOnInit(): void {
     this.getIngredients();
     this.getRecipePage();
+    //setting up the total number of stars used in the rating
     this.config.max = 5;
+    //on cards stars are for read only
     this.config.readonly = true;
   }
 
@@ -55,7 +60,7 @@ export class RecipeListComponent implements OnInit {
         this.ingredients = resp;
       },
       error:(error)=>{
-        console.log("no hay ingredientes");
+        console.log("No hay ingredientes");
       }
     })
   }
@@ -64,6 +69,12 @@ export class RecipeListComponent implements OnInit {
     this.getRecipePage(1, 6, "name");
   }
 
+  clear(){
+    this.selectedIngredients = [];
+    this.getRecipePage();
+  }
+
+  //method to get recipes
   getRecipePage(pageNumber:number = 1, sizeNumber:number = 6, sortField:string = "name"){
     const ingredients:any[] = this.selectedIngredients.map(ing => ing.ingredientId);
     const ingFilter:IngredientFilter = {ingredientsIds: ingredients};
@@ -83,15 +94,17 @@ export class RecipeListComponent implements OnInit {
     })
   }
 
+  //Method to verifry if the user is the owner of the recipe
   canEditRecipe(recipe :Recipe){
-    //verificando si el usuario es dueño de la receta o no
     return this.authService.isSameUser(recipe.user.userId);
   }
 
+  //Method to verify if the user has an admin rol
   isAdmin(){
     return this.authService.isAdmin();
   }
   
+  //Method to deleta a recipe
   deleteRecipe(id:any){
    Swal.fire({
     title: '¿Estás seguro de querer eliminar esta receta?',
@@ -126,11 +139,11 @@ export class RecipeListComponent implements OnInit {
   })
 }
 
+//Method to add or remove a recipe from favorite's list
 changeFavorite(recipe:Recipe){
-
   const isFavorite = recipe.favorite;
   const recipeId:any = recipe.recipeId;
-  
+  //if is mark as favorite, it gets removed
   if(isFavorite){
     this.favoriteServ.deleteFavoriteRecipeId(recipeId).subscribe({
       next:(resp)=>{
@@ -140,6 +153,7 @@ changeFavorite(recipe:Recipe){
         console.log(error);
       }
     })
+    //if is not mark as favorite is added
   } else{
     const recipeToAdd: NewFavorite = {recipeId:recipeId}
     this.favoriteServ.addFavorite(recipeToAdd).subscribe({
@@ -153,6 +167,7 @@ changeFavorite(recipe:Recipe){
   }
 }
 
+//Method to update a recipe
 private updateRecipe(recipeId: number, value: boolean) {
   const existingRecipe = this.recipes.content.find(rec => rec.recipeId === recipeId);
   if (existingRecipe) {
@@ -160,10 +175,12 @@ private updateRecipe(recipeId: number, value: boolean) {
   }
 }
 
+//Method to show the modal for voting
 votingModal(id:any){
   this.selectedStars = 0;
   this.ratingServ.getRating(id).subscribe({
     next:(resp) =>{
+      console.log(resp)
       this.rating = resp;
       this.selectedStars = this.rating.points;
     }, 
@@ -173,7 +190,9 @@ votingModal(id:any){
   })
 }
 
+//Method to submit the vote
 voteRecipe(){
+  console.log(this.rating.recipe.recipeId)
   const newRating: Rating = {
     points: this.selectedStars,
     recipe: {
@@ -184,18 +203,12 @@ voteRecipe(){
 
   this.ratingServ.addRating(newRating).subscribe({
     next:(resp) =>{
-      this.getRecipePage();
+      this.getRecipePage(this.paginator.selected);
     },
     error:(error) =>{
       console.log(error)
     }
   });
-
-
- 
 }
-
-
-
 
 }
