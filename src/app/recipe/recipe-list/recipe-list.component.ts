@@ -15,6 +15,7 @@ import { Rating } from 'src/app/interfaces/rating.interface';
 import { RatingService } from 'src/app/services/rating.service';
 import { PaginatorComponent } from '../../shared/paginator/paginator.component';
 
+
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html'
@@ -106,38 +107,48 @@ export class RecipeListComponent implements OnInit {
   
   //Method to deleta a recipe
   deleteRecipe(id:any){
-   Swal.fire({
-    title: '¿Estás seguro de querer eliminar esta receta?',
-    text: "No será posible revertir este cambio.",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#476E61',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, eliminar',
-    cancelButtonText: 'Cancelar'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.recipeService.deleteRecipe(id).subscribe({
-        next:(resp) =>{
-          Swal.fire({
-            title: 'Eliminada',
-            text: 'La receta ha sido eliminada',
-            icon:'success',
-            confirmButtonColor: '#476E61'
-        })
-        this.getRecipePage();
-        }, error:(error)=>{
-          Swal.fire({
-            icon: 'error',
-            title: '¡Upss!',
-            text: `${error.error.message}`,
-            confirmButtonColor: '#476E61'
+    let recipeName: string = "";
+    this.recipeService.getRecipe(id).subscribe({
+      next:(resp)=>{
+        recipeName = resp.name;
+      }, 
+      error:(error)=>{
+        console.log(error);
+      }, 
+      complete:() =>{
+        Swal.fire({
+          title: `¿Estás seguro de querer eliminar ${recipeName}?`,
+          text: "No será posible revertir este cambio.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#476E61',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, eliminar',
+          cancelButtonText: 'Cancelar'
+        })  .then((result) => {
+          if (result.isConfirmed) {
+            this.recipeService.deleteRecipe(id).subscribe({
+              next:(resp) =>{
+                Swal.fire({
+                  title: 'Eliminada',
+                  text: 'La receta ha sido eliminada',
+                  icon:'success',
+                  confirmButtonColor: '#476E61'
+              })
+              this.getRecipePage();
+              }, error:(error)=>{
+                Swal.fire({
+                  icon: 'error',
+                  title: '¡Upss!',
+                  text: `${error.error.message}`,
+                  confirmButtonColor: '#476E61'
+                })}
+              })
+            }
           })
-        }
-      })
+      }
+    })
     }
-  })
-}
 
 //Method to add or remove a recipe from favorite's list
 changeFavorite(recipe:Recipe){
