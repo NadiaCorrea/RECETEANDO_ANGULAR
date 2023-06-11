@@ -8,14 +8,14 @@
 <!--Form-->
     <div class="row justify-content-center">
         <form (ngSubmit)="addUnit()" #myForm ="ngForm" autocomplete="off" action="#">
-            <div class="col">
+            <div class="col-8 offset-2">
                 <label for="name"><h4>*Nombre de la unidad:</h4></label>
                 <input  class="form-control" name="name" type="text" maxlength="100" [(ngModel)] ="unit.name" required>
                 <div class="link-danger mb-3">
                     <span class="form-text text-danger" *ngIf="notValidField('name')">El nombre de la unidad es obligatorio*</span>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-8 offset-2">
                 <label for="abreviation"><h4>*Abreviatura de la unidad:</h4></label>
                 <input  class="form-control" name="abreviation" type="text" maxlength="10" [(ngModel)] ="unit.abreviation" required>
                 <div class="link-danger mb-3">

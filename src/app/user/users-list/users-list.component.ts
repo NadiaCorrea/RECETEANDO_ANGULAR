@@ -12,6 +12,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
   templateUrl: './users-list.component.html'
 })
 export class UsersListComponent implements OnInit, AfterViewInit {
+
   displayedColumns: string[] = [ 'username', 'name', 'email', 'action'];
   dataSource: MatTableDataSource<User>;
 

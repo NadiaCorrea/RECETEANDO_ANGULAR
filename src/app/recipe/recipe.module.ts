@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { NgModule } from '@angular/core';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     ReactiveFormsModule,
     RecipeRoutingModule, 
     AutoCompleteModule,
-    MultiSelectModule
+    MultiSelectModule, 
+    NgbRatingModule
   ]
 })
 
