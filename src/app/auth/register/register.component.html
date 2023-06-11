@@ -11,7 +11,7 @@
         <div class="mb-2 row justify-content-center">
             <div class="col-8 col-md-6">
                 <label for="username">Nombre de usuario*:</label>
-                <input type="text" class="form-control" placeholder="Juanito3" formControlName="username">
+                <input type="text" class="form-control" placeholder="Juanito3" formControlName="username" minlength="3" maxlength="10">
                 <span class="form-text text-danger" *ngIf="notValidField('username')">
                     El nombre de usuario obligatorio* y debe tener como mínimo tres caracteres y como máximo 10.
                 </span>
@@ -21,7 +21,7 @@
         <div class="mb-2 row justify-content-center">
             <div class="col-8 col-md-6">
                 <label for="name">Nombre y apellidos*:</label>
-                <input type="text" class="form-control" placeholder="Juan Perez" formControlName="name">
+                <input type="text" class="form-control" placeholder="Juan Perez" formControlName="name" minlength="3" maxlength="40">
                 <span class="form-text text-danger" *ngIf="notValidField('name')">
                     El campo "nombre y apellidos" es obligatorio y debe tener como mínimo tres caracteres y como máximo 40.
                 </span>
