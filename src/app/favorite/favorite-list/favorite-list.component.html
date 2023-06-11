@@ -1,0 +1,39 @@
+<div class="container" *ngIf="loaded">
+    <div class="col-12 text-center mt-5 mb-5">
+        <h1>Listado de Favoritos</h1>
+    </div>
+
+    <div class="row mb-5 align-items-center d-flex" *ngIf="favorites.length === 0">
+        <div class="col-sm-12 col-md-6 order-md-2 text-center mb-3">
+            <h2>¡Ups!</h2> <br>
+            <h3>No has añadido ninguna receta a tu listado de favoritos.</h3>
+        </div>
+        <div class="col-sm-12 col-md-6 order-md-1">
+            <img class="photo" src="../../../assets/images/recipeNotFound.jpg" alt="No se ha encontrado recetas asociadas">
+        </div>
+    </div>
+
+    <div class="row"  *ngIf="favorites.length > 0">
+        <div class="col-sm-12 col-md-6" *ngFor="let favorite of favorites">
+            <div class="card mb-3" style="max-width: 500px;">
+                <div class="row g-0">
+                <div class="col-md-4">
+                    <img *ngIf="favorite.photo === null" src="https://res.cloudinary.com/dhqubydyc/image/upload/v1677067465/notPhoto_f2r3fn.jpg" class="img-fluid rounded-start"  alt="{{favorite.name}}">
+                    <img *ngIf="favorite.photo !== null" src="{{favorite.photo}}" class="img-fluid rounded-start"  alt="{{favorite.name}}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{favorite.name}}</h5>
+                        <p class="card-text">{{favorite.description}}</p>
+                        <p class="card-text"><small class="text-body-secondary">Creada por: {{favorite.owner}}</small></p>
+                        <div class="d-flex justify-content-around">
+                            <a [routerLink]="['/recipe', favorite.recipeId]" class="btn btn-primary">Ir a la receta</a>
+                            <a (click)="deleteFavorite(favorite.favoriteId)" class="btn btn-primary">Eliminar de favoritos</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>        
+    </div>   
+</div>

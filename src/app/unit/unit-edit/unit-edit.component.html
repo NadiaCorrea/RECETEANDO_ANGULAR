@@ -1,17 +1,19 @@
  <!--Title-->
   <div class="row text-center">
     <div class="col-12">
-      <h3>Editar unidad</h3>
+      <h2>Editar unidad</h2>
     </div>
   </div>
  <!--Form-->
   <div class="row ms-3">
-    <div mat-dialog-content>
+    <div mat-dialog-content style="overflow-x:hidden;">
       <mat-form-field class="col-12">
-        <input matInput [(ngModel)]="info.name">
+        <label for="name" class="mb-2"><strong>Unidad:</strong></label>
+        <input matInput [(ngModel)]="info.name" name="name" class="ms-5">
       </mat-form-field>
       <mat-form-field class="col-12">
-        <input matInput [(ngModel)]="info.abreviation">
+        <label for="abreviation" class="mb-2"><strong>Abreviatura:</strong></label>
+        <input matInput [(ngModel)]="info.abreviation" name="abreviation" class="ms-5">
       </mat-form-field>
     </div>
   </div>

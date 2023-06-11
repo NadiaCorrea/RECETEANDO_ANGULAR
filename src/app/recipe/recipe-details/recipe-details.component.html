@@ -8,6 +8,7 @@
 <!--Form-->
     <div class="row">
     <form [formGroup]="recipeFormGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        
 <!--Recipe Photo-->
         <div class="row mt-3">
             <div class="col-4">
@@ -61,22 +62,35 @@
                                 <span *ngIf="!isValidQuantity(i)">*La cantidad del ingrediente es obligatoria.</span>
                             </div>
                         </td>
-                        <td>
+                        <!-- <td>
                             <select formControlName="ingredientUnit" class="form-control" required>
                                 <option *ngFor="let unit of listUnits" [value]="unit.unitId">{{unit.abreviation}}</option>
                             </select>
                             <div class="link-danger mb-3">
                                 <span *ngIf="!isValidUnit(i)">*La unidad del ingrediente es obligatoria.</span>
                             </div>
+                        </td> -->
+                        
+                        <td>
+                            <p-autoComplete formControlName="ingredientUnit" [suggestions]="filteredUnits" (completeMethod)="filterUnit($event)" field="fullname" dataKey="unitId"></p-autoComplete>
+                            <div class="link-danger mb-3">
+                                <span *ngIf="!isValidUnit(i) || !isUnitIncluded(i)">*La unidad del ingrediente es obligatoria.</span>
+                            </div>
                         </td>
                         <td>
+                            <p-autoComplete formControlName="ingredientId" [suggestions]="filteredIngredients"  (completeMethod)="filterIngredient($event)" field="name" dataKey="ingredientId"></p-autoComplete>
+                            <div class="link-danger mb-3">
+                                <span *ngIf="!isValidIngredientId(i) || !isIngredientIncluded(i)">*El ingrediente es obligatorio.</span>
+                            </div>
+                        </td>
+                        <!-- <td>
                             <select formControlName="ingredientId" class="form-control" required>
                                 <option *ngFor="let item of listIngredients" [value]="item.ingredientId">{{item.name}}</option>
                             </select>
                             <div class="link-danger mb-3">
                                 <span *ngIf="!isValidIngredientId(i)">*El ingrediente es obligatorio.</span>
                             </div>
-                        </td>
+                        </td> -->
                         <td *ngIf="canEdit">
                            <button (click)="removeRecipeIngredient(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
                         </td>

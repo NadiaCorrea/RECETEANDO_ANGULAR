@@ -5,15 +5,21 @@
 
   <div class="row m-3">
 
-    <div class="col-8">
-      <form (ngSubmit) = "search()"  #myForm = "ngForm" class="d-flex ms-5"   role="search">
-        <input class="form-control me-2" type="search" [(ngModel)]="keyword"
-        name="keyword"   placeholder="Búsqueda" aria-label="Search" size="50">
-        <button class="btn btn-primary" type="submit">Buscar</button>
-    </form>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-8">
+          <p-multiSelect [options]="ingredients" [(ngModel)]="selectedIngredients" optionLabel="name" placeholder="Buscar recetas por ingredientes" emptyFilterMessage ="No existe ninguna receta para las opciones seleccionadas"></p-multiSelect>
+        </div>
+        <div class="col-2">
+          <button  class="btn btn-primary" (click)="search()"><i class="bi bi-search icons-btn"></i> Buscar</button>
+        </div>
+        <div class="col-2">
+          <button  class="btn btn-primary" (click)="clear()"><i class="bi bi-eraser icons-btn"></i> Limpiar</button>
+        </div>
+      </div>      
     </div>
-    <div class="col-2 offset-2">
-      <button class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus"></i> Añadir receta</button>
+    <div class="col-2 offset-1">
+      <button class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus icons-btn"></i> Añadir receta</button>
     </div>
   </div>
 
@@ -26,17 +32,53 @@
         
           <div class="col-md-4 col-sm-12 g-3" *ngFor="let recipe of recipes.content">
             <div class="card text-center" style="width:100%;">
+              <!--Photo-->
               <img  *ngIf="recipe.photo !== null"  [src]="recipe.photo" class="card-img-top" [alt]="recipe.name">
               <img  *ngIf="recipe.photo === null" src="https://res.cloudinary.com/dhqubydyc/image/upload/v1677067465/notPhoto_f2r3fn.jpg" class="card-img-top" [alt]="recipe.name">
               <div class="card-body">
-                <h5 class="card-title">{{recipe.name}}</h5>
-                <div class="d-flex justify-content-around">
-                  <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye icons-btn"></i> Ver detalles</a>
-                  <button *ngIf="canEditRecipe(recipe) || isAdmin()"  (click)="deleteRecipe(recipe.recipeId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
+                <div class="d-flex mb-2">
+                  <!--Recipe's name-->
+                  <h5 class="card-title flex-fill">{{recipe.name}}</h5>
+                  <!--Favorite-->
+                  <a class="flex-fill" (click)="changeFavorite(recipe)" data-placement="bottom" title="Da clic para añadir a tu listado de favoritos"><i class="bi bi-heart-fill" [ngClass]="{'heartColor': recipe.favorite}"></i></a>
                 </div>
+                <!--Rating-->
+                <div class="d-flex justify-content-around mb-3 rating">
+                  <ngb-rating [rate]="recipe.averageRating ||0" data-placement="bottom" title="Promedio de votos: {{recipe.averageRating}} estrellas"></ngb-rating>
+                </div>
+                <div class="d-flex justify-content-around">
+                  <!-- Go to Recipe's details-->
+                  <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye icons-btn"></i> Detalles</a>
+                  <!-- Go to Voting Modal -->
+                  <button type="button" class="btn btn-primary" *ngIf="!canEditRecipe(recipe) && !isAdmin()" data-bs-toggle="modal" data-bs-target="#votingModal" (click) = "votingModal(recipe.recipeId)" ><i class="bi bi-pencil icons-btn"></i> Votar</button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="votingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">{{rating.recipe.name}}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <ngb-rating [(rate)]="selectedStars" (hover)="hoveredStars=$event" (leave)="hoveredStars=0" [readonly]="readonly"></ngb-rating>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="button" class="btn btn-primary" (click)="voteRecipe()" data-bs-dismiss="modal">Votar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Delete recipe if user is the owner or is admin -->
+                  <button *ngIf="canEditRecipe(recipe) || isAdmin()"  (click)="deleteRecipe(recipe.recipeId)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
+                </div>  
                 
+                
+
               </div>
             </div>
+            
+             
           </div>
          
         </div>
@@ -44,6 +86,6 @@
     </div>
   </div>
   
-  <app-paginator [totalPages]="recipes.totalPages" (selectPage)="getRecipePage($event)"></app-paginator>
+  <app-paginator #paginator [totalPages]="recipes.totalPages" (selectPage)="getRecipePage($event)"></app-paginator>
 
 </div>

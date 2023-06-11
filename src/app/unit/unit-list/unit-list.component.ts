@@ -90,7 +90,7 @@ deleteUnit(id:number){
 
 updateUnit(unit: Unit){
   const dialogRef = this.dialog.open(UnitEditComponent, {
-    width: '600px',
+    width: '500px',
     data: unit
   });
 

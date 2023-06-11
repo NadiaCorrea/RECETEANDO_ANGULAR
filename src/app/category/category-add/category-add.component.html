@@ -8,14 +8,14 @@
     <!--Form-->
         <div class="row justify-content-center">
             <form (ngSubmit)="addCategory()" #myForm ="ngForm" autocomplete="off" action="#">
-                <div class="col">
+                <div class="col-8 offset-2">
                     <label for="name"><h4>*Nombre de la categoría:</h4></label>
                     <input  class="form-control" name="name" type="text" maxlength="100" [(ngModel)] ="category.name" required>
                     <div class="link-danger mb-3">
                         <span class="form-text text-danger" *ngIf="notValidField('name')">El nombre de la categoría es obligatorio*</span>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-8 offset-2">
                     <label for="description"><h4>*Descripción de la categoría:</h4></label>
                     <input  class="form-control" name="description" type="text" maxlength="200" [(ngModel)] ="category.description" required>
                     <div class="link-danger mb-3">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
     <!--Buttons-->
-                <div class="row mb-5 text-center" >
+                <div class="row mt-5 mb-5 text-center">
                     <div class="col-6">
                         <button class="btn btn-primary" type="submit" [disabled]="myForm.invalid">Guardar</button>
                     </div>
