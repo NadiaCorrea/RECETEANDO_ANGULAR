@@ -19,7 +19,7 @@
       </div>      
     </div>
     <div class="col-2 offset-1">
-      <button class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus icons-btn"></i> Añadir receta</button>
+      <button *ngIf="!isAdmin()" class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus icons-btn"></i> Añadir receta</button>
     </div>
   </div>
 
@@ -48,7 +48,10 @@
                 </div>
                 <div class="d-flex justify-content-around">
                   <!-- Go to Recipe's details-->
-                  <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]"><i class="bi bi-eye icons-btn"></i> Detalles</a>
+                  <a class="btn btn-primary" [routerLink]="['/recipe', recipe.recipeId]">
+                    <span *ngIf="!canEditRecipe(recipe) || isAdmin()"><i class="bi bi-eye icons-btn"></i> Detalles</span>
+                    <span *ngIf="canEditRecipe(recipe)"><i class="bi bi-pencil-square icons-btn"></i> Editar</span>
+                  </a>
                   <!-- Go to Voting Modal -->
                   <button type="button" class="btn btn-primary" *ngIf="!canEditRecipe(recipe) && !isAdmin()" data-bs-toggle="modal" data-bs-target="#votingModal" (click) = "votingModal(recipe.recipeId)" ><i class="bi bi-pencil icons-btn"></i> Votar</button>
                   <!-- Modal -->

@@ -9,7 +9,7 @@
             <h3>No has añadido ninguna receta a tu listado de favoritos.</h3>
         </div>
         <div class="col-sm-12 col-md-6 order-md-1">
-            <img class="photo" src="../../../assets/images/recipeNotFound.jpg" alt="No se ha encontrado recetas asociadas">
+            <img class="photo" src="assets/images/recipeNotFound.jpg" alt="No se ha encontrado recetas asociadas">
         </div>
     </div>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{favorite.name}}</h5>
-                        <p class="card-text">{{favorite.description}}</p>
+                        <p class="card-text textOver">{{favorite.description}}</p>
                         <p class="card-text"><small class="text-body-secondary">Creada por: {{favorite.owner}}</small></p>
                         <div class="d-flex justify-content-around">
                             <a [routerLink]="['/recipe', favorite.recipeId]" class="btn btn-primary">Ir a la receta</a>

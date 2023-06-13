@@ -48,7 +48,7 @@ export class IngredientAddComponent implements OnInit {
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'La unidad ha sido añadida.',
+              title: 'El ingrediente ha sido añadido.',
               showConfirmButton: true,
               confirmButtonColor: '#476E61',
               timer: 3500
