@@ -1,4 +1,8 @@
 <nav aria-label="pagination">
+  <div class="d-flex justify-content-center">
+    <p>Hay un total de {{totalElements}} recetas</p>
+  </div>
+  
     <ul class="pagination pagination-md justify-content-center">
       <li class="page-item" [ngClass]="{'active': selected === i+1}" aria-current="page" *ngFor="let page of pages; let i = index">
         <span *ngIf="selected === i + 1" class="page-link">{{i+1}}</span>

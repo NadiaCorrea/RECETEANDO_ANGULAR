@@ -10,6 +10,9 @@ export class PaginatorComponent implements OnInit, OnChanges {
   @Input()
   totalPages: number = 0;
 
+  @Input()
+  totalElements: number = 0;
+  
   @Output()
   selectPage:EventEmitter<number> = new EventEmitter();
 

@@ -11,8 +11,8 @@
     <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: busca" #input>
   </mat-form-field>
   
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort style="text-align: center;">
+  <div class="mat-elevation-z8 example-table-container">
+    <table mat-table class="example-table" [dataSource]="dataSource" matSort style="text-align: center;">
   
       <!-- Username Column -->
       <ng-container matColumnDef="username">
@@ -46,8 +46,6 @@
         <td class="mat-cell" colspan="4">No hay ningún usuario que coincida con "{{input.value}}"</td>
       </tr>
     </table>
-  
-    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
   </div>
-
+  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
