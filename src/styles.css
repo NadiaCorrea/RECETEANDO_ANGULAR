@@ -16,19 +16,17 @@
   html {
     margin: 0;
     padding: 0;
-    height: 100vh;
     width: 100%;
   }
   
   body{
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100%;
     width: 100%;
   }
   
   .principal{
-    height: 100vh;
     width: 100%;
     margin: 0;
     padding: 0;
@@ -36,18 +34,16 @@
     flex-direction: column;
   }
 
-  app-homepage, app-register, app-favorite-list, app-login, 
-  app-update-password, app-update-profile, app-unit-add, app-category-add, app-ingredient-add{
-    height: 100%;
+  .router{
+    flex: 1 0 auto;
   }
 
   .myFooter{
-      margin-top: 5px;
+      flex-shrink: 0;
       background: var(--yellow);
   }
 
  .footer{
-    position: sticky;
     bottom: 0;
   }
   

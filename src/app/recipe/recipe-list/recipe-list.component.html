@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid mb-5">
   <div class="row mt-5 mb-5 text-center">
     <h1>Listado de recetas</h1>
   </div>
@@ -88,7 +88,7 @@
       </div>
     </div>
   </div>
-  
-  <app-paginator #paginator [totalPages]="recipes.totalPages" [totalElements]="recipes.totalElements" (selectPage)="getRecipePage($event)"></app-paginator>
-
+  <div class="row mb-5">
+    <app-paginator #paginator [totalPages]="recipes.totalPages" [totalElements]="recipes.totalElements" (selectPage)="getRecipePage($event)"></app-paginator>
+  </div>
 </div>
