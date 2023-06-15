@@ -15,53 +15,47 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
 <!--Recetas-->
-                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/recipe']">
-                            <i class="bi bi-journal-richtext"></i></a>
-                        <p>Recetas</p>
+                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/recipe']" routerLinkActive="active">
+                            <p>Recetas</p><i class="bi bi-journal-richtext"></i></a>
+                        
                         </li>
 <!--Favoritos-->
-                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/favorite/list']">
-                            <i class="bi bi-postcard-heart"></i></a>
-                        <p>Favoritos</p>
+                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/favorite/list']" routerLinkActive="active">
+                            <p>Favoritos</p><i class="bi bi-postcard-heart"></i></a>
                         </li>
 <!--Usuarios-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/user/list']">
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/user/list']" routerLinkActive="active"><p>Usuarios</p>
                             <i class="bi bi-people"></i></a>
-                        <p>Usuarios</p>
                         </li>
 <!--Unidades-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/unit/list']">
-                            <i class="bi bi-file-spreadsheet"></i></a>
-                        <p>Unidades</p>
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/unit/list']" routerLinkActive="active">
+                            <p>Unidades</p><i class="bi bi-file-spreadsheet"></i></a>                     
                         </li>
 <!--Categorías-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/category/list']">
-                            <i class="bi bi-tags"></i></a>
-                        <p>Categorías</p>
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/category/list']" routerLinkActive="active">
+                            <p>Categorías</p><i class="bi bi-tags"></i></a>                       
                         </li>
 <!--Ingredientes-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/ingredient/list']">
-                            <i class="bi bi-card-list"></i></a>
-                        <p>Ingredientes</p>
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/ingredient/list']" routerLinkActive="active">
+                            <p>Ingredientes</p><i class="bi bi-card-list"></i></a>
                         </li>                       
                     </ul>
 
 <!--Configuración-->
-                    <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
+                    <ul class="navbar-nav" *ngIf="isLoggedIn()">
                         <li class="nav-item dropdown text-center">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-gear"></i>                   
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><p>Configuración</p>
+                                <i class="bi bi-gear"></i>                
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" [routerLink]="['/user/password']">Modificar contraseña</a></li>
-                                <li><a class="dropdown-item" [routerLink]="['/user/profile']">Modificar perfil</a></li>
-                            </ul>
-                            <p>Configuración</p> 
+                                <li><a class="dropdown-item" [routerLink]="['/user/password']" routerLinkActive="active">Modificar contraseña</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/user/profile']" routerLinkActive="active">Modificar perfil</a></li>
+                            </ul>  
+                             
                         </li>
 <!--Logout-->
-                        <li class="nav-item text-center ms-5">
-                            <a class="nav-link" (click)="logOut()"><i class="bi bi-box-arrow-right"></i></a>
-                            <p>Salir</p> 
+                        <li class="nav-item text-center ms-2">
+                            <a class="nav-link" (click)="logOut()"><p>Salir</p><i class="bi bi-box-arrow-right"></i></a>
                         </li>
                     </ul>
                 </div>

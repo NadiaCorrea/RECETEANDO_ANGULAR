@@ -1,33 +1,33 @@
-<div class="container-fluid mb-5">
+<div class="container-fluid mb-5 mb-5">
   <div class="row mt-5 mb-5 text-center">
     <h1>Listado de recetas</h1>
   </div>
 
-  <div class="row m-3">
-
-    <div class="col-9">
-      <div class="row">
-        <div class="col-8">
-          <p-multiSelect [options]="ingredients" [(ngModel)]="selectedIngredients" optionLabel="name" placeholder="Buscar recetas por ingredientes" emptyFilterMessage ="No existe ninguna receta para las opciones seleccionadas"></p-multiSelect>
-        </div>
-        <div class="col-2">
-          <button  class="btn btn-primary" (click)="search()"><i class="bi bi-search icons-btn"></i> Buscar</button>
-        </div>
-        <div class="col-2">
-          <button  class="btn btn-primary" (click)="clear()"><i class="bi bi-eraser icons-btn"></i> Limpiar</button>
-        </div>
-      </div>      
-    </div>
-    <div class="col-2 offset-1">
-      <button *ngIf="!isAdmin()" class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus icons-btn"></i> Añadir receta</button>
-    </div>
-  </div>
+ 
 
   <div class="row">
     <div class="album">
-
       <div class="container mb-5">
 
+        <!--search box and buttons-->
+        <div class="row mb-5">
+            <div class="row d-flex justify-content-around">
+              <div class="col-5">
+                <p-multiSelect [options]="ingredients" [(ngModel)]="selectedIngredients" optionLabel="name" placeholder="Buscar recetas por ingredientes" emptyFilterMessage ="No existe ninguna receta para las opciones seleccionadas"></p-multiSelect>
+              </div>
+              <div class="col-4 d-grid gap-2 d-md-flex">
+                <button  class="btn btn-primary" (click)="search()"><i class="bi bi-search icons-btn"></i> Buscar</button>
+                <button  class="btn btn-primary" (click)="clear()"><i class="bi bi-eraser icons-btn"></i> Limpiar</button>
+              </div>
+              <div class="col-2 d-grid">
+                <button *ngIf="!isAdmin()" class="btn btn-primary btn-md" [routerLink]="['/recipe/add']"><i class="bi bi-file-plus icons-btn"></i> Añadir receta</button>
+              </div>
+            </div>      
+        </div>
+
+
+
+        <!--Cards-->
         <div class="row g-3">
         
           <div class="col-md-4 col-sm-12 g-3" *ngFor="let recipe of recipes.content">

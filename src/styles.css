@@ -80,6 +80,10 @@
       cursor: pointer;
   }
   
+  .navbar-nav .nav-link.active, .navbar-nav .nav-link.show{
+    color: var(--black);
+    font-weight:bold;
+  }
   .active>.page-link{
       background-color: var(--darkerGreen);
       border-color: var(--darkerGreen);

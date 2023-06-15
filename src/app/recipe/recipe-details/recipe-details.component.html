@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
 <!--Title-->
     <div class="row text-center mb-5">
         <div class="col-12">
@@ -10,7 +10,7 @@
     <form [formGroup]="recipeFormGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
         
 <!--Recipe Photo-->
-        <div class="row mt-3">
+        <div class="row mt-3 mb-5">
             <div class="col-4">
                 <img class="img-thumbnail" *ngIf="recipe.photo !== null"  [src]="recipe.photo" [alt]="recipe.name" style="height: 200px" data-placement="bottom" [title]="recipe.name">
                 <img class="img-thumbnail" *ngIf="recipe.photo === null" src="https://res.cloudinary.com/dhqubydyc/image/upload/v1674458089/cld-sample-4.jpg" [alt]="recipe.name" style="height: 200px" data-placement="bottom" [title]="recipe.name">
@@ -37,15 +37,18 @@
 <!--Recipe photo to upload-->
                 <div class="input-group mb-3" *ngIf="canEdit">
                     <input formControlName="recipePhoto" type="file" class="form-control" (change)="uploadFile($event)">
-                    <label class="input-group-text" for="recipePhoto">Subir nueva foto</label>
                 </div>
             </div>
         </div>
 <!--RecipeIngredients[]-->
+        <div class="d-flex justify-content-between mb-5">
+            <h2>Ingredientes</h2>
+            <button *ngIf="canEdit" type= "button" class="btn btn-primary" (click)="addRecipeIngredients()"><i class="bi bi-file-plus icons-btn"></i> Añadir ingrediente</button>
+        </div>
+
         <div class="row mt-2 mb-3" formArrayName="recipeIngredients">
-            <div class="col-10">
-                <h2>Ingredientes</h2>
-                <table class="table mt-5">
+            <div class="col-12">
+                <table class="table">
                     <thead>
                     <tr>
                         <th scope="col">Cantidad</th>
@@ -62,15 +65,7 @@
                                 <span *ngIf="!isValidQuantity(i)">*La cantidad del ingrediente es obligatoria.</span>
                             </div>
                         </td>
-                        <!-- <td>
-                            <select formControlName="ingredientUnit" class="form-control" required>
-                                <option *ngFor="let unit of listUnits" [value]="unit.unitId">{{unit.abreviation}}</option>
-                            </select>
-                            <div class="link-danger mb-3">
-                                <span *ngIf="!isValidUnit(i)">*La unidad del ingrediente es obligatoria.</span>
-                            </div>
-                        </td> -->
-                        
+                    
                         <td>
                             <p-autoComplete formControlName="ingredientUnit" [suggestions]="filteredUnits" (completeMethod)="filterUnit($event)" field="fullname" dataKey="unitId"></p-autoComplete>
                             <div class="link-danger mb-3">
@@ -83,14 +78,7 @@
                                 <span *ngIf="!isValidIngredientId(i) || !isIngredientIncluded(i)">*El ingrediente es obligatorio.</span>
                             </div>
                         </td>
-                        <!-- <td>
-                            <select formControlName="ingredientId" class="form-control" required>
-                                <option *ngFor="let item of listIngredients" [value]="item.ingredientId">{{item.name}}</option>
-                            </select>
-                            <div class="link-danger mb-3">
-                                <span *ngIf="!isValidIngredientId(i)">*El ingrediente es obligatorio.</span>
-                            </div>
-                        </td> -->
+                        
                         <td *ngIf="canEdit">
                            <button (click)="removeRecipeIngredient(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn" ></i> Eliminar</button> 
                         </td>
@@ -99,31 +87,29 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-2"  *ngIf="canEdit">
-                <button type= "button" class="btn btn-primary" (click)="addRecipeIngredients()"><i class="bi bi-file-plus icons-btn"></i> Añadir ingrediente</button>
-            </div>
+            
         </div>
 <!--RecipeSteps[]-->
         <div class="row" formArrayName="steps">
-            <div class="col-10">
-                <h2 class="mb-5">Pasos</h2>
-                <div class="row mt-2" *ngFor="let step of steps.controls; let i = index" [formGroupName]="i">
-                    <div class="col-2">
-                        <input class="form-control" type="number" name="orderNum" id="orderNum" formControlName="orderNum" style="max-width: 100px" min="1" [readOnly]="!canEdit">
-                        <span class="link-danger mb-3" *ngIf="!isValidOrderNum(i)">*El número de orden es obligatorio.</span>
-                    </div>
-                    <div class="col-8 form-floating mb-3">
-                        <textarea class="form-control" placeholder="Añade la descripción aquí" id="floatingTextarea2" formControlName="detail" name="detail" style="height: fit-content;" maxlength="300"  [readOnly]="!canEdit"></textarea>
-                        <span class="link-danger mb-3" *ngIf="!isValidText(i)">*El detalle del paso es obligatorio.</span>
-                    </div>
-                    <div class="col-2" *ngIf="canEdit">
-                        <button (click)="removeStep(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button> 
-                    </div>
+            <div class="d-flex justify-content-between mb-5">
+                <h2>Pasos</h2>
+                <button *ngIf="canEdit" type= "button" class="btn btn-primary" (click)="addSteps()"> <i class="bi bi-file-plus icons-btn"></i> Añadir paso</button>
+            </div>
+       
+            <div class="row mt-2" *ngFor="let step of steps.controls; let i = index" [formGroupName]="i">
+                <div class="col-2">
+                    <input class="form-control" type="number" name="orderNum" id="orderNum" formControlName="orderNum" style="max-width: 100px" min="1" [readOnly]="!canEdit">
+                    <span class="link-danger mb-3" *ngIf="!isValidOrderNum(i)">*El número de orden es obligatorio.</span>
+                </div>
+                <div class="col-8 form-floating mb-3">
+                    <textarea class="form-control" placeholder="Añade la descripción aquí" id="floatingTextarea2" formControlName="detail" name="detail" style="height: fit-content;" maxlength="300"  [readOnly]="!canEdit"></textarea>
+                    <span class="link-danger mb-3" *ngIf="!isValidText(i)">*El detalle del paso es obligatorio.</span>
+                </div>
+                <div class="col-2" *ngIf="canEdit">
+                    <button (click)="removeStep(i)" class="btn btn-danger btn-sm"><i class="bi bi-trash icons-btn"></i> Eliminar</button> 
                 </div>
             </div>
-            <div class="col-2 justify-content-end" *ngIf="canEdit">
-                <button type= "button" class="btn btn-primary" (click)="addSteps()"> <i class="bi bi-file-plus icons-btn"></i> Añadir paso</button>
-            </div>
+       
         </div>
 <!--Submit and cancel buttons-->
         <div class="row mt-5 mb-5 text-center d-flex justify-content-around" >
