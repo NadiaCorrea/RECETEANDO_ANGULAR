@@ -205,7 +205,6 @@ export class AddRecipeComponent implements OnInit {
 
   uploadFile(event:any){
     this.file = event.target.files[0];
-    console.log(this.file);
     if(this.file){
       this.fileName = this.file.name;
     }
@@ -226,7 +225,6 @@ export class AddRecipeComponent implements OnInit {
       }
       recipeIngredients.push(recipeIngredient);
     });
-    console.log(recipeIngredients)
     this.backRecipe.recipeIngredients = recipeIngredients;
   }
 

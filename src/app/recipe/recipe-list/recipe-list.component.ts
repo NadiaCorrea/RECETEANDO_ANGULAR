@@ -191,7 +191,6 @@ votingModal(id:any){
   this.selectedStars = 0;
   this.ratingServ.getRating(id).subscribe({
     next:(resp) =>{
-      console.log(resp)
       this.rating = resp;
       this.selectedStars = this.rating.points;
     }, 
@@ -203,7 +202,6 @@ votingModal(id:any){
 
 //Method to submit the vote
 voteRecipe(){
-  console.log(this.rating.recipe.recipeId)
   const newRating: Rating = {
     points: this.selectedStars,
     recipe: {

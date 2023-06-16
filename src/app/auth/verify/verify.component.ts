@@ -18,7 +18,6 @@ export class VerifyComponent implements OnInit {
     
     this.userService.verifyUser(code).subscribe({
       next:(resp) =>{
-        console.log(resp);
         Swal.fire({
           position: 'center',
           icon: 'success',

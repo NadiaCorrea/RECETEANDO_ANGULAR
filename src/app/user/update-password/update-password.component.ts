@@ -36,7 +36,6 @@ export class UpdatePasswordComponent implements OnInit {
 
     this.userServ.updatePassword(changePass).subscribe({
       next:(resp) =>{
-        console.log(resp)
         Swal.fire({
           position: 'center',
           icon: 'success',

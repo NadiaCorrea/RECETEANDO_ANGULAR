@@ -87,7 +87,6 @@ export class RecipeDetailsComponent implements OnInit {
       next:(resp) =>{
         //guarda respuesta en el objeto receta
         this.recipe = resp;
-        console.log(this.recipe)
         //verificando si el usuario es dueño de la receta o no
         this.canEdit = this.authService.isSameUser(this.recipe.user.userId)
         //asigna el valor del nombre de la receta 
@@ -106,7 +105,6 @@ export class RecipeDetailsComponent implements OnInit {
           const fg = this.getStep(step);
           this.steps.push(fg);
         });
-        console.log(this.recipeFormGroup);
       },
       error:(error) =>{
         Swal.fire({
@@ -235,7 +233,6 @@ export class RecipeDetailsComponent implements OnInit {
 
     uploadFile(event:any){
       this.file = event.target.files[0];
-      console.log(this.file);
       if(this.file){
         this.fileName = this.file.name;
       }
@@ -256,12 +253,10 @@ export class RecipeDetailsComponent implements OnInit {
         }
         recipeIngredients.push(recipeIngredient);
       });
-      console.log(recipeIngredients)
       this.backRecipe.recipeIngredients = recipeIngredients;
     }
 
     onSubmit(){
-      console.log( "envia " + this.recipeFormGroup.value)
       const formData = new FormData();
       formData.append('file', this.file);
       this.formGroupToBackRecipe();

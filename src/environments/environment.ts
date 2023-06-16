@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://receteandojava-production.up.railway.app'
-  //url: 'http://localhost:8080'
+  //url: 'https://receteandojava-production.up.railway.app'
+  url: 'http://localhost:8080'
 };
 
 /*
