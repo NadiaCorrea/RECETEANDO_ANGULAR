@@ -7,7 +7,7 @@
                 <a class="navbar-brand" href="" data-placement="bottom" title="Haz click para ir a la página principal">
                     <img src="assets/images/logo.png"  style="max-width: 100px; max-height: 80px;" alt="Logo de receteando"></a>
                 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" *ngIf="isLoggedIn()">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -15,28 +15,28 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav me-2 mb-2 mb-lg-0" *ngIf="isLoggedIn()">
 <!--Recetas-->
-                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/recipe']" routerLinkActive="active">
+                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/recipe']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                             <p>Recetas</p><i class="bi bi-journal-richtext"></i></a>
                         
                         </li>
 <!--Favoritos-->
-                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/favorite/list']" routerLinkActive="active">
+                        <li class="nav-item text-center ms-5"><a class="nav-link" [routerLink]="['/favorite/list']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                             <p>Favoritos</p><i class="bi bi-postcard-heart"></i></a>
                         </li>
 <!--Usuarios-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/user/list']" routerLinkActive="active"><p>Usuarios</p>
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/user/list']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><p>Usuarios</p>
                             <i class="bi bi-people"></i></a>
                         </li>
 <!--Unidades-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/unit/list']" routerLinkActive="active">
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/unit/list']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                             <p>Unidades</p><i class="bi bi-file-spreadsheet"></i></a>                     
                         </li>
 <!--Categorías-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/category/list']" routerLinkActive="active">
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/category/list']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                             <p>Categorías</p><i class="bi bi-tags"></i></a>                       
                         </li>
 <!--Ingredientes-->
-                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/ingredient/list']" routerLinkActive="active">
+                        <li class="nav-item text-center ms-5" *ngIf="isAdmin()"><a class="nav-link" [routerLink]="['/ingredient/list']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                             <p>Ingredientes</p><i class="bi bi-card-list"></i></a>
                         </li>                       
                     </ul>
@@ -48,14 +48,14 @@
                                 <i class="bi bi-gear"></i>                
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" [routerLink]="['/user/password']" routerLinkActive="active">Modificar contraseña</a></li>
-                                <li><a class="dropdown-item" [routerLink]="['/user/profile']" routerLinkActive="active">Modificar perfil</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/user/password']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Modificar contraseña</a></li>
+                                <li><a class="dropdown-item" [routerLink]="['/user/profile']" routerLinkActive="active" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">Modificar perfil</a></li>
                             </ul>  
                              
                         </li>
 <!--Logout-->
                         <li class="nav-item text-center ms-2">
-                            <a class="nav-link" (click)="logOut()"><p>Salir</p><i class="bi bi-box-arrow-right"></i></a>
+                            <a class="nav-link" (click)="logOut()" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><p>Salir</p><i class="bi bi-box-arrow-right"></i></a>
                         </li>
                     </ul>
                 </div>

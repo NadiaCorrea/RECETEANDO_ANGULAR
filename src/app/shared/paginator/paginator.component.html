@@ -1,12 +1,19 @@
 <nav aria-label="pagination">
   <div class="d-flex justify-content-center">
-    <p>Hay un total de {{totalElements}} recetas</p>
+    <p>Hay un total de {{totalElements}} recetas en {{pages.length}} páginas</p>
   </div>
   
     <ul class="pagination pagination-md justify-content-center">
+      <li class="page-item"  aria-current="page" >
+        <button *ngIf="selected > 3" (click)="onSelect(1)" class="page-link">Primera</button>
+      </li>
+      
       <li class="page-item" [ngClass]="{'active': selected === i+1}" aria-current="page" *ngFor="let page of pages; let i = index">
-        <span *ngIf="selected === i + 1" class="page-link">{{i+1}}</span>
-        <button *ngIf="selected !== i + 1" class="page-link"  (click)="onSelect(i+1)">{{i+1}}</button>
+        <span *ngIf="selected === i + 1 && selected > i - 2 && selected < i + 4" class="page-link">{{i+1}}</span>
+        <button *ngIf="selected !== i + 1 && selected > i - 2 && selected < i + 4" class="page-link"  (click)="onSelect(i+1)">{{i+1}}</button>
+      </li>
+      <li class="page-item"  aria-current="page" >
+        <button *ngIf="selected < pages.length - 2"  (click)="onSelect(pages.length)" class="page-link">Última</button>
       </li>
     </ul>
   </nav>
