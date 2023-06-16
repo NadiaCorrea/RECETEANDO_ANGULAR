@@ -158,10 +158,13 @@ changeFavorite(recipe:Recipe){
   if(isFavorite){
     this.favoriteServ.deleteFavoriteRecipeId(recipeId).subscribe({
       next:(resp)=>{
-        this.updateRecipe(recipeId, false);
+
       },
       error:(error)=>{
         console.log(error);
+      }, 
+      complete:()=>{
+        this.getRecipePage(this.paginator.selected);
       }
     })
     //if is not mark as favorite is added
@@ -169,20 +172,15 @@ changeFavorite(recipe:Recipe){
     const recipeToAdd: NewFavorite = {recipeId:recipeId}
     this.favoriteServ.addFavorite(recipeToAdd).subscribe({
       next:(resp) =>{
-        this.updateRecipe(recipeId, true);
+        
       },
       error:(error)=>{
         console.log(error);
+      }, 
+      complete:()=>{
+        this.getRecipePage(this.paginator.selected);
       }
     })
-  }
-}
-
-//Method to update a recipe
-private updateRecipe(recipeId: number, value: boolean) {
-  const existingRecipe = this.recipes.content.find(rec => rec.recipeId === recipeId);
-  if (existingRecipe) {
-    existingRecipe.favorite = value;
   }
 }
 
